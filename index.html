@@ -1,11 +1,492 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="refresh" content="0; url=save-the-date.html">
-    <title>Redirecting…</title>
-  </head>
-  <body>
-    <p>Redirecting to the Save the Date card. If you are not redirected, <a href="save-the-date.html">click here</a>.</p>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jestin & Poorani — Save the Date</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF4F1;
+    --ink:#3A3A3E;
+    --ink-soft:#8A8790;
+    --white:#FFFFFF;
+    --page-grad: linear-gradient(135deg, #FDEBF3 0%, #F1E9FB 45%, #E7F3FB 100%);
+
+    /* pastel palette */
+    --sky:#AFD3E8;       /* powder blue - christian primary */
+    --sky-soft:#EAF3F8;
+    --lilac:#D9CDEE;     /* lilac - christian secondary */
+    --rose:#F0AFC4;      /* dusty rose - hindu primary */
+    --rose-soft:#FBEAF0;
+    --turquoise:#9BD8D3; /* turquoise - hindu secondary */
+    --butter:#F7DFA0;    /* soft gold-pastel accent shared */
+
+    --accent:var(--sky);
+    --accent-soft:var(--sky-soft);
+    --accent2:var(--lilac);
+    --transition:0.6s cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Poppins', sans-serif;
+    background:var(--page-grad);
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px 14px;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  .blob{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(50px);
+    opacity:0.55;
+    z-index:0;
+    transition:background var(--transition);
+  }
+  .blob1{ width:340px; height:340px; top:-120px; left:-100px; background:var(--accent2); }
+  .blob2{ width:300px; height:300px; bottom:-100px; right:-80px; background:var(--accent); }
+
+  .card{
+    position:relative;
+    width:100%;
+    max-width:600px;
+    background:linear-gradient(160deg, var(--white) 0%, var(--accent-soft) 130%);
+    border-radius:32px;
+    transition:background var(--transition);
+    padding:52px 40px 40px;
+    text-align:center;
+    box-shadow:0 30px 70px -30px rgba(58,58,62,0.18);
+    z-index:2;
+    animation:riseIn 1s cubic-bezier(.2,.8,.2,1) both;
+  }
+
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(18px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .monogram{
+    width:82px; height:82px;
+    border-radius:50%;
+    margin:0 auto 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--accent-soft);
+    border:2px solid var(--accent);
+    transition:all var(--transition);
+  }
+  .monogram span{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    font-size:24px;
+    color:var(--ink);
+  }
+
+  .eyebrow{
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    font-size:11px;
+    font-weight:500;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+  }
+
+  .names{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    font-size:clamp(30px,6vw,42px);
+    margin:0;
+    line-height:1.15;
+    color:var(--ink);
+  }
+  .amp{
+    font-family:'Parisienne', cursive;
+    font-size:0.85em;
+    padding:0 8px;
+    color:var(--accent);
+    transition:color var(--transition);
+  }
+
+  .badge{
+    display:inline-block;
+    margin:20px auto 26px;
+    padding:9px 26px;
+    border-radius:999px;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--ink);
+    background:var(--butter);
+  }
+
+  .tabs{
+    display:inline-flex;
+    gap:4px;
+    background:var(--bg);
+    padding:5px;
+    border-radius:999px;
+    margin-bottom:30px;
+  }
+  .tab-btn{
+    border:none;
+    background:transparent;
+    font-family:'Poppins', sans-serif;
+    font-size:13.5px;
+    font-weight:500;
+    letter-spacing:0.02em;
+    padding:10px 20px;
+    border-radius:999px;
+    cursor:pointer;
+    color:var(--ink-soft);
+    transition:all 0.3s ease;
+  }
+  .tab-btn.active{
+    background:var(--accent);
+    color:var(--ink);
+  }
+
+  .panel{display:none;animation:fadeUp .5s ease both;}
+  .panel.active{display:block;}
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(8px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .dot-divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-bottom:22px;
+  }
+  .dot-divider span{ width:5px; height:5px; border-radius:50%; background:var(--accent); }
+  .dot-divider .line{ width:36px; height:1px; background:var(--accent); border-radius:1px; }
+
+  .event-date{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    font-size:clamp(24px,4.6vw,28px);
+    color:var(--ink);
+    margin:0 0 2px;
+  }
+  .event-day{
+    font-size:11.5px;
+    font-weight:500;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:24px;
+    transition:color var(--transition);
+  }
+
+  .venues{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    max-width:440px;
+    margin:0 auto;
+  }
+  .venue{
+    background:var(--accent-soft);
+    border-radius:18px;
+    padding:14px 18px;
+    text-align:left;
+    transition:background var(--transition);
+  }
+  .venue-label{
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:5px;
+    transition:color var(--transition);
+  }
+  .venue-name{
+    font-family:'Playfair Display', serif;
+    font-size:18px;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .venue-address{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+
+  .details-row{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-top:20px;
+    flex-wrap:wrap;
+  }
+  .detail-chip{
+    font-size:11.5px;
+    color:var(--ink-soft);
+    background:var(--bg);
+    border-radius:999px;
+    padding:8px 16px;
+  }
+  .detail-chip b{ color:var(--ink); font-weight:600; }
+
+  .heartfelt{
+    margin-top:24px;
+    font-family:'Parisienne', cursive;
+    font-size:19px;
+    color:var(--accent);
+    transition:color var(--transition);
+  }
+
+  .hashtag{
+    margin-top:10px;
+    display:inline-block;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.05em;
+    color:var(--ink);
+    background:var(--accent);
+    padding:6px 16px;
+    border-radius:999px;
+    transition:background var(--transition);
+  }
+
+  .footer-note{
+    margin-top:22px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+
+  .theme-hindu{ --accent:var(--rose); --accent-soft:var(--rose-soft); --accent2:var(--turquoise); }
+
+  .music-btn{
+    position:fixed;
+    bottom:22px;
+    right:22px;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    border:none;
+    background:var(--white);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 10px 26px -10px rgba(58,58,62,0.3);
+    transition:transform 0.25s ease;
+    z-index:10;
+  }
+  .music-btn:hover{transform:scale(1.06);}
+  .music-btn .bars{display:flex;align-items:flex-end;gap:2.5px;height:16px;}
+  .music-btn .bars span{
+    width:3px;background:var(--accent);border-radius:2px;
+    animation:bar 1s ease-in-out infinite;
+    transition:background var(--transition);
+  }
+  .music-btn .bars span:nth-child(1){height:6px;animation-delay:0s;}
+  .music-btn .bars span:nth-child(2){height:14px;animation-delay:0.2s;}
+  .music-btn .bars span:nth-child(3){height:9px;animation-delay:0.4s;}
+  @keyframes bar{0%,100%{transform:scaleY(0.5);}50%{transform:scaleY(1);}}
+  .music-btn.paused .bars span{animation-play-state:paused;}
+  .music-hint{
+    position:fixed;
+    bottom:28px;
+    right:82px;
+    font-size:12px;
+    color:var(--ink-soft);
+    z-index:10;
+  }
+
+  @media(max-width:480px){
+    .card{padding:44px 22px 32px; border-radius:24px;}
+    .music-hint{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob1" id="blob1"></div>
+<div class="blob blob2" id="blob2"></div>
+
+<div class="card" id="card">
+  <div class="monogram"><span>J&amp;P</span></div>
+  <div class="eyebrow">Together with our families</div>
+  <div class="names">Jestin <span class="amp">&amp;</span> Poorani</div>
+  <div class="badge">Save the Date</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-theme="christian" onclick="setTheme('christian')">Christian Wedding</button>
+    <button class="tab-btn" data-theme="hindu" onclick="setTheme('hindu')">Hindu Wedding</button>
+  </div>
+
+  <div class="panel active" id="panel-christian">
+    <div class="dot-divider"><span class="line" style="width:36px;height:1px;background:var(--accent);"></span><span></span><span class="line" style="width:36px;height:1px;background:var(--accent);"></span></div>
+    <div class="event-date">January 7, 2027</div>
+    <div class="event-day">Thursday</div>
+    <div class="venues">
+      <div class="venue">
+        <div class="venue-label">Nuptial Mass</div>
+        <div class="venue-name">St. Thomas Malankara Catholic Church</div>
+        <div class="venue-address">Chuvanamannu, Thrissur</div>
+      </div>
+      <div class="venue">
+        <div class="venue-label">Reception</div>
+        <div class="venue-name">Wedding Hall</div>
+        <div class="venue-address">Chuvanamannu, Thrissur</div>
+      </div>
+    </div>
+    <div class="details-row">
+      <div class="detail-chip"><b>Attire</b> · Formal / Church Attire</div>
+      <div class="detail-chip"><b>RSVP</b> · Invitation to follow</div>
+    </div>
+    <div class="hashtag">#JandPSaidYes</div>
+  </div>
+
+  <div class="panel" id="panel-hindu">
+    <div class="dot-divider"><span class="line" style="width:36px;height:1px;background:var(--accent);"></span><span></span><span class="line" style="width:36px;height:1px;background:var(--accent);"></span></div>
+    <div class="event-date">January 20, 2027</div>
+    <div class="event-day">Wednesday</div>
+    <div class="venues">
+      <div class="venue">
+        <div class="venue-label">Muhurtham</div>
+        <div class="venue-name">Viralimalai Murugan Temple</div>
+        <div class="venue-address">Trichy</div>
+      </div>
+      <div class="venue">
+        <div class="venue-label">Reception</div>
+        <div class="venue-name">Vaniyar Maghal</div>
+        <div class="venue-address">Manachanallur, Trichy</div>
+      </div>
+    </div>
+    <div class="details-row">
+      <div class="detail-chip"><b>Attire</b> · Traditional South Indian Attire</div>
+      <div class="detail-chip"><b>RSVP</b> · Invitation to follow</div>
+    </div>
+    <div class="hashtag">#JandPMuhurtham</div>
+  </div>
+
+  <div class="heartfelt">We can't wait to celebrate with you!</div>
+  <div class="footer-note">Formal invitation with full details to follow</div>
+</div>
+
+<div class="music-hint" id="musicHint">a little tune for you</div>
+<button class="music-btn paused" id="musicBtn" onclick="toggleMusic()">
+  <div class="bars" id="musicBars"><span></span><span></span><span></span></div>
+</button>
+<audio id="bgAudio" src="uyirey.mp3" loop preload="auto"></audio>
+
+<script>
+function setTheme(theme){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.theme===theme));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+theme).classList.add('active');
+  document.getElementById('card').classList.toggle('theme-hindu', theme==='hindu');
+}
+
+let audioCtx = null;
+let musicOn = false;
+let scheduleTimer = null;
+let nextNoteTime = 0;
+const tempo = 88;
+const noteLen = 60/tempo;
+const phrase = [
+  {n:'C4', d:1}, {n:'E4', d:1}, {n:'G4', d:1}, {n:'B4', d:1},
+  {n:'A4', d:1}, {n:'G4', d:2}, {n:'D4', d:1}, {n:'C4', d:2},
+];
+const freqs = {C4:261.63, D4:293.66, E4:329.63, G4:392.0, A4:440.0, B4:493.88, C5:523.25};
+
+function scheduleNote(freq, time, dur){
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'sine';
+  osc.frequency.value = freq;
+  const osc2 = audioCtx.createOscillator();
+  osc2.type = 'triangle';
+  osc2.frequency.value = freq/2;
+  const gain2 = audioCtx.createGain();
+
+  gain.gain.setValueAtTime(0.0001, time);
+  gain.gain.exponentialRampToValueAtTime(0.09, time+0.08);
+  gain.gain.exponentialRampToValueAtTime(0.0001, time+dur*0.95);
+
+  gain2.gain.setValueAtTime(0.0001, time);
+  gain2.gain.exponentialRampToValueAtTime(0.035, time+0.1);
+  gain2.gain.exponentialRampToValueAtTime(0.0001, time+dur*0.95);
+
+  osc.connect(gain).connect(audioCtx.destination);
+  osc2.connect(gain2).connect(audioCtx.destination);
+  osc.start(time); osc.stop(time+dur);
+  osc2.start(time); osc2.stop(time+dur);
+}
+
+let phraseIndex = 0;
+function schedulerTick(){
+  while(nextNoteTime < audioCtx.currentTime + 1.0){
+    const step = phrase[phraseIndex % phrase.length];
+    const dur = step.d * noteLen;
+    scheduleNote(freqs[step.n], nextNoteTime, dur*0.9);
+    nextNoteTime += dur;
+    phraseIndex++;
+  }
+  scheduleTimer = setTimeout(schedulerTick, 200);
+}
+
+function toggleMusic(){
+  const btn = document.getElementById('musicBtn');
+  const hint = document.getElementById('musicHint');
+  const fileAudio = document.getElementById('bgAudio');
+
+  if(!musicOn){
+    // Try the user-supplied song file first (see instructions below the widget)
+    fileAudio.currentTime = 0;
+    fileAudio.volume = 0.5;
+    const playPromise = fileAudio.play();
+    if(playPromise !== undefined){
+      playPromise.then(()=>{
+        musicOn = true; usingFile = true;
+        btn.classList.remove('paused');
+        hint.textContent = 'now playing';
+      }).catch(()=>{
+        startGeneratedTune();
+      });
+    } else {
+      startGeneratedTune();
+    }
+  } else {
+    if(usingFile){
+      fileAudio.pause();
+      usingFile = false;
+    } else {
+      clearTimeout(scheduleTimer);
+    }
+    musicOn = false;
+    btn.classList.add('paused');
+    hint.textContent = 'a little tune for you';
+  }
+}
+
+let usingFile = false;
+function startGeneratedTune(){
+  if(!audioCtx){ audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }
+  if(audioCtx.state === 'suspended'){ audioCtx.resume(); }
+  nextNoteTime = audioCtx.currentTime + 0.1;
+  phraseIndex = 0;
+  schedulerTick();
+  musicOn = true;
+  usingFile = false;
+  document.getElementById('musicBtn').classList.remove('paused');
+  document.getElementById('musicHint').textContent = 'now playing';
+}
+</script>
+</body>
 </html>
