@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Poorani & Jestin | Christian Wedding</title>
+<title>Jestin & Poorani | Christian Wedding</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Poppins:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#4A3B5C; --ink-soft:#8B7A98; --cream:#FAF5EA;
-    --page-grad: linear-gradient(160deg, #F6D6B8 0%, #E3C2D2 50%, #A98AC9 100%);
-    --accent:#8B6FB8; --accent-soft:#EFE7F6; --gold:#D9A441; --gold-soft:#F6E3BE;
+    --ink:#EFEAFB; --ink-soft:#B3AAD1; --cream:#251F42;
+    --page-grad: linear-gradient(160deg, #171531 0%, #221C46 50%, #2C1F52 100%);
+    --accent:#A78BE0; --accent-soft:#332A56; --gold:#E3B75B; --gold-soft:#F6E3BE;
     --serif:'Playfair Display', serif; --script:'Parisienne', cursive;
     --body-font:'Poppins', sans-serif; --italic:'Cormorant Garamond', serif;
   }
@@ -18,12 +18,15 @@
   html{scroll-behavior:smooth;}
   html,body{margin:0;padding:0;}
   body{ font-family:var(--body-font); background:var(--page-grad); color:var(--ink); overflow-x:hidden; position:relative; }
-  ::selection{ background:var(--gold-soft); color:var(--ink); }
+  ::selection{ background:var(--gold-soft); color:#2E2136; }
 
   .blob{ position:fixed; border-radius:50%; filter:blur(70px); opacity:0.3; z-index:0; }
   .blob1{ width:380px; height:380px; top:-130px; left:-110px; background:var(--accent); }
   .blob2{ width:340px; height:340px; bottom:0; right:-130px; background:var(--gold); }
 
+  #starLayer{ position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
+  .star{ position:absolute; border-radius:50%; background:#fff; animation:starTwinkle ease-in-out infinite; }
+  @keyframes starTwinkle{ 0%,100%{ opacity:0.15; transform:scale(0.7); } 50%{ opacity:1; transform:scale(1.2); } }
   #flowerLayer{ position:fixed; inset:0; pointer-events:none; z-index:5; overflow:hidden; }
   .petal{ position:absolute; top:-40px; opacity:0.8; animation-name:fall; animation-timing-function:linear; animation-iteration-count:infinite; }
   @keyframes fall{
@@ -34,7 +37,7 @@
 
   .home-link{
     position:fixed; top:18px; left:18px; z-index:20; text-decoration:none;
-    background:rgba(255,255,255,0.85); backdrop-filter:blur(6px); color:var(--ink);
+    background:rgba(46,33,54,0.85); backdrop-filter:blur(6px); color:var(--ink);
     font-size:12px; font-weight:600; padding:9px 16px; border-radius:999px;
     box-shadow:0 8px 20px -10px rgba(0,0,0,0.25);
   }
@@ -49,7 +52,7 @@
   header.hero{ padding-top:70px; padding-bottom:50px; }
   .hero-photo{
     width:260px; height:260px; border-radius:50%; overflow:hidden; margin:0 auto 26px;
-    border:6px solid var(--gold-soft); box-shadow:0 26px 60px -24px rgba(90,70,120,0.35);
+    border:6px solid var(--gold-soft); box-shadow:0 26px 60px -24px rgba(0,0,0,0.55);
   }
   .hero-photo img{ width:100%; height:100%; object-fit:cover; object-position:center 30%; }
   .names-hero{
@@ -73,7 +76,7 @@
   }
   .btn:hover{ transform:translateY(-2px); }
   .btn-gold{ background:linear-gradient(135deg, var(--gold-soft), var(--gold)); color:#4A2E1E; box-shadow:0 12px 26px -12px rgba(217,164,65,0.6); }
-  .btn-outline{ background:transparent; color:var(--ink); border:1.5px solid rgba(74,59,92,0.25); }
+  .btn-outline{ background:transparent; color:var(--ink); border:1.5px solid rgba(242,235,250,0.25); }
   .btn-outline:hover{ border-color:var(--accent); color:var(--accent); }
   .btn-small{ padding:9px 16px; font-size:11.5px; }
   .scroll-cue{ margin-top:46px; color:var(--accent); font-size:20px; animation:bounce 2s ease-in-out infinite; cursor:pointer; }
@@ -101,7 +104,7 @@
   .vine-card{ width:calc(50% - 40px); background:var(--accent-soft); border-radius:20px; padding:26px 24px; box-shadow:0 20px 44px -26px rgba(60,50,100,0.3); text-align:left; border-top:4px solid var(--accent); }
   .vine-item.left{ justify-content:flex-start; }
   .vine-item.right{ justify-content:flex-end; }
-  .tl-tag{ display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); background:rgba(255,255,255,0.7); padding:5px 14px; border-radius:999px; margin-bottom:12px; }
+  .tl-tag{ display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); background:rgba(255,255,255,0.10); padding:5px 14px; border-radius:999px; margin-bottom:12px; }
   .tl-title{ font-family:var(--serif); font-style:italic; font-size:22px; margin:0 0 4px; }
   .tl-desc{ font-size:13px; color:var(--ink-soft); margin-bottom:14px; }
   .tl-meta{ display:flex; flex-wrap:wrap; gap:8px 22px; margin-bottom:16px; }
@@ -118,13 +121,6 @@
     .vine-item .vine-node{ left:16px; }
     .vine-card{ width:100%; }
   }
-
-  /* ATTIRE NOTE */
-  .attire-section .attire-card{
-    background:var(--cream); border-radius:22px; padding:30px 26px; margin-top:40px;
-    box-shadow:0 20px 44px -28px rgba(60,50,100,0.3);
-  }
-  .attire-card p{ font-size:13.5px; color:var(--ink-soft); margin:6px 0 0; }
 
   /* CROSS LINK */
   .cross-link{ background:var(--cream); text-align:center; padding:60px 24px; }
@@ -168,6 +164,7 @@
 
 <div class="blob blob1"></div>
 <div class="blob blob2"></div>
+<div id="starLayer"></div>
 <div id="flowerLayer"></div>
 <a class="home-link" href="index.html">← Home</a>
 
@@ -175,10 +172,10 @@
 
   <header class="hero">
     <div class="hero-photo reveal">
-      <img src="d89381a9-e6a9-4b5e-9f76-3facca8dae1c.jpg" alt="Poorani and Jestin illustrated as a bride and groom in Christian wedding attire">
+      <img src="d89381a9-e6a9-4b5e-9f76-3facca8dae1c.jpg" alt="Jestin and Poorani illustrated as a bride and groom in Christian wedding attire">
     </div>
     <div class="eyebrow reveal">Christian Wedding</div>
-    <h1 class="names-hero reveal">Poorani <span class="amp">&amp;</span> Jestin</h1>
+    <h1 class="names-hero reveal">Jestin <span class="amp">&amp;</span> Poorani</h1>
     <div class="tagline reveal">A morning of sacred vows and quiet blessings</div>
 
     <div class="countdown reveal" id="countdown">
@@ -198,10 +195,10 @@
 
   <section class="message-section" id="message">
     <div class="eyebrow reveal">With Joy In Our Hearts</div>
-    <p class="reveal">We warmly invite you to celebrate our wedding and share in this beautiful day with us.</p>
-    <p class="reveal">Join us for our Wedding filled with love, vows, hymns, and the blessing of our families.</p>
-    <p class="reveal">Your presence will turn this morning into a memory we will carry forever.</p>
-    <div class="signature reveal">With love, Poorani &amp; Jestin</div>
+    <p class="reveal">Every love story is beautiful, but ours is our favorite — and we can't wait to begin this new chapter with you by our side.</p>
+    <p class="reveal">As we exchange our vows beneath the church we hold so dear, all we ask for is your presence, your prayers, and your blessings.</p>
+    <p class="reveal">Come share in the hymns, the quiet joy, and the moment two hearts become one family.</p>
+    <div class="signature reveal">With love, Jestin &amp; Poorani</div>
   </section>
 
   <section class="timeline-section" id="timeline">
@@ -254,24 +251,15 @@
     </div>
   </section>
 
-  <section class="attire-section">
-    <div class="eyebrow reveal">A Small Note</div>
-    <h2 class="section-title reveal">Attire &amp; RSVP</h2>
-    <div class="attire-card reveal">
-      <p><b>Attire</b> · Formal / Church Attire</p>
-      <p><b>RSVP</b> · Invitation to follow</p>
-    </div>
-  </section>
-
   <div class="cross-link">
     <p class="reveal">Also joining our Hindu wedding celebrations?</p>
     <a class="reveal" href="hindu.html">🪔 View Hindu Wedding Invitation</a>
   </div>
 
   <footer>
-    <div class="footer-names reveal">Poorani &amp; Jestin</div>
+    <div class="footer-names reveal">Jestin &amp; Poorani</div>
     <div class="reveal">We look forward to celebrating with you.</div>
-    <div class="copyright reveal">© 2027 Poorani &amp; Jestin · Made with love</div>
+    <div class="copyright reveal">© 2027 Jestin &amp; Poorani · Made with love</div>
   </footer>
 
 </div>
@@ -280,7 +268,7 @@
 <button class="music-btn paused" id="musicBtn" onclick="toggleMusic()">
   <div class="bars" id="musicBars"><span></span><span></span><span></span></div>
 </button>
-<audio id="bgAudio" src="uyirey.mp3" loop preload="auto"></audio>
+<audio id="bgAudio" src="mundhinam.mp3" loop preload="auto"></audio>
 
 <script>
 function revealOnScroll(){
@@ -309,6 +297,22 @@ revealOnScroll();
   tick(); setInterval(tick, 1000);
 })();
 
+(function initStars(){
+  const layer = document.getElementById('starLayer');
+  const count = 40;
+  for(let i=0;i<count;i++){
+    const el = document.createElement('span');
+    el.className = 'star';
+    const size = 1.5 + Math.random()*2.5;
+    el.style.width = size+'px'; el.style.height = size+'px';
+    el.style.left = (Math.random()*100)+'vw';
+    el.style.top = (Math.random()*100)+'vh';
+    el.style.animationDuration = (2 + Math.random()*3)+'s';
+    el.style.animationDelay = (-Math.random()*5)+'s';
+    layer.appendChild(el);
+  }
+})();
+
 (function initFlowers(){
   const layer = document.getElementById('flowerLayer');
   const blossoms = ['🤍','🌸','✿','❀','💮'];
@@ -326,26 +330,26 @@ revealOnScroll();
 
 function downloadIcs(){
   const ics = [
-    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Poorani and Jestin//Wedding//EN',
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Jestin and Poorani//Wedding//EN',
     'BEGIN:VEVENT','UID:christian-ceremony-poorani-jestin@savethedate',
     'DTSTART:20270102T040000Z','DTEND:20270102T060000Z',
-    'SUMMARY:Poorani & Jestin - Christian Wedding Ceremony',
+    'SUMMARY:Jestin & Poorani - Christian Wedding Ceremony',
     'LOCATION:St. Thomas Malankara Catholic Church\\, Chuvanamannu\\, Thrissur',
     'DESCRIPTION:Wedding ceremony.','END:VEVENT',
     'BEGIN:VEVENT','UID:christian-reception-poorani-jestin@savethedate',
     'DTSTART:20270102T063000Z','DTEND:20270102T090000Z',
-    'SUMMARY:Poorani & Jestin - Christian Wedding Reception',
+    'SUMMARY:Jestin & Poorani - Christian Wedding Reception',
     'LOCATION:Dream City Convention Center\\, Thrissur',
     'DESCRIPTION:Wedding reception.','END:VEVENT','END:VCALENDAR'
   ].join('\r\n');
   const blob = new Blob([ics], {type:'text/calendar'});
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = 'Poorani-Jestin-Christian-Wedding.ics';
+  const a = document.createElement('a'); a.href = url; a.download = 'Jestin-Poorani-Christian-Wedding.ics';
   document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
 }
 
 function sharePage(){
-  const shareData = { title: 'Poorani & Jestin — Christian Wedding', text: "You're invited to Poorani & Jestin's Christian wedding ceremony!", url: window.location.href };
+  const shareData = { title: 'Jestin & Poorani — Christian Wedding', text: "You're invited to Jestin & Poorani's Christian wedding ceremony!", url: window.location.href };
   if(navigator.share){ navigator.share(shareData).catch(()=>{}); }
   else{ navigator.clipboard.writeText(shareData.url).then(()=>alert('Link copied to clipboard!')).catch(()=>prompt('Copy this link:', shareData.url)); }
 }

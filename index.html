@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Poorani & Jestin | Save the Date</title>
+<title>Jestin & Poorani | Save the Date</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&family=Parisienne&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#4A3B5C; --ink-soft:#8B7A98; --cream:#FAF5EA;
-    --page-grad: linear-gradient(160deg, #F6D6B8 0%, #E3C2D2 50%, #A98AC9 100%);
-    --lilac:#8B6FB8; --rose:#C2185B; --gold:#D9A441;
+    --ink:#EFEAFB; --ink-soft:#B3AAD1; --cream:#251F42;
+    --page-grad: linear-gradient(160deg, #171531 0%, #221C46 50%, #2C1F52 100%);
+    --lilac:#A78BE0; --rose:#E8688F; --gold:#E3B75B; --gold-soft:#F6E3BE;
     --serif:'Playfair Display', serif; --script:'Parisienne', cursive; --body-font:'Poppins', sans-serif;
   }
   *{box-sizing:border-box;}
@@ -23,6 +23,9 @@
   .blob{ position:fixed; border-radius:50%; filter:blur(60px); opacity:0.3; z-index:0; }
   .blob1{ width:340px; height:340px; top:-120px; left:-100px; background:var(--lilac); }
   .blob2{ width:320px; height:320px; bottom:-100px; right:-90px; background:var(--rose); }
+  #starLayer{ position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
+  .star{ position:absolute; border-radius:50%; background:#fff; animation:starTwinkle ease-in-out infinite; }
+  @keyframes starTwinkle{ 0%,100%{ opacity:0.15; transform:scale(0.7); } 50%{ opacity:1; transform:scale(1.2); } }
   #flowerLayer{ position:fixed; inset:0; pointer-events:none; z-index:5; overflow:hidden; }
   .petal{ position:absolute; top:-40px; opacity:0.85; animation-name:fall; animation-timing-function:linear; animation-iteration-count:infinite; }
   @keyframes fall{
@@ -31,28 +34,55 @@
     100%{ transform:translateY(110vh) translateX(-16px) rotate(360deg); }
   }
 
-  /* ================= COVER / FIRST PAGE ================= */
-  .cover{
-    position:fixed; inset:0; z-index:100;
-    background:var(--page-grad);
+  /* ================= COVER / FIRST PAGE: wish upon a star ================= */
+  .wish-overlay{
+    position:fixed; inset:0; z-index:100; background:var(--page-grad);
     display:flex; flex-direction:column; align-items:center; justify-content:center;
-    transition:opacity 0.8s ease, visibility 0.8s ease; cursor:pointer; text-align:center; padding:20px;
+    cursor:pointer; text-align:center; padding:20px; overflow:hidden;
+    transition:opacity 0.9s ease, visibility 0.9s ease;
   }
-  .cover.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
-  .cover-ring{
-    width:132px; height:132px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-    background:var(--cream); border:3px solid var(--gold); position:relative;
-    animation:pulseRing 2.4s ease-in-out infinite; margin-bottom:22px;
+  .wish-overlay.open{ opacity:0; visibility:hidden; pointer-events:none; }
+
+  .shooting-star{
+    position:absolute; top:18%; left:-10%; width:3px; height:3px; border-radius:50%;
+    background:#fff; box-shadow:0 0 8px 2px rgba(255,255,255,0.85);
+    animation:shoot 7s linear infinite;
   }
-  @keyframes pulseRing{
-    0%,100%{ box-shadow:0 0 0 0 rgba(217,164,65,0.35); }
-    50%{ box-shadow:0 0 0 14px rgba(217,164,65,0); }
+  .shooting-star::before{
+    content:''; position:absolute; top:50%; right:0; width:90px; height:1px; transform:translateY(-50%);
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.85));
   }
-  .cover-mono{ font-family:var(--serif); font-weight:700; font-size:34px; color:var(--rose); }
-  .cover-script{ font-family:var(--script); font-size:24px; color:var(--rose); margin-bottom:4px; }
-  .cover-names{ font-family:var(--serif); font-style:italic; font-weight:600; font-size:clamp(28px,6vw,42px); color:var(--ink); margin:0 0 8px; }
-  .cover-hint{
-    margin-top:26px; font-size:11.5px; letter-spacing:0.25em; text-transform:uppercase; color:var(--ink-soft);
+  .shooting-star.s2{ top:42%; animation-delay:2.6s; }
+  .shooting-star.s3{ top:70%; animation-delay:4.8s; }
+  @keyframes shoot{
+    0%{ transform:translate(0,0); opacity:0; }
+    4%{ opacity:1; }
+    32%{ transform:translate(130vw,70vh); opacity:0; }
+    100%{ transform:translate(130vw,70vh); opacity:0; }
+  }
+
+  .wish-star-wrap{ position:relative; width:110px; height:110px; margin-bottom:20px; }
+  .wish-star-wrap svg{ width:100%; height:100%; animation:starPulse 2.2s ease-in-out infinite; transition:transform 0.8s ease, opacity 0.8s ease; }
+  @keyframes starPulse{
+    0%,100%{ filter:drop-shadow(0 0 8px rgba(227,183,91,0.5)); transform:scale(1); }
+    50%{ filter:drop-shadow(0 0 20px rgba(227,183,91,0.9)); transform:scale(1.06); }
+  }
+  .wish-overlay.open .wish-star-wrap svg{ animation:none; transform:scale(3); opacity:0; }
+  .wish-burst{
+    position:absolute; left:50%; top:50%; width:10px; height:10px; transform:translate(-50%,-50%) scale(0);
+    border-radius:50%; pointer-events:none;
+    background:radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(227,183,91,0.55) 45%, transparent 72%);
+  }
+  .wish-overlay.open .wish-burst{ animation:rayBurst 0.9s ease-out forwards; }
+  @keyframes rayBurst{
+    0%{ transform:translate(-50%,-50%) scale(0); opacity:1; }
+    100%{ transform:translate(-50%,-50%) scale(55); opacity:0; }
+  }
+  .wish-seal{ position:relative; transition:opacity 0.4s ease, transform 0.4s ease; }
+  .wish-overlay.open .wish-seal{ opacity:0; transform:translateY(8px); }
+  .wish-names{ font-family:var(--script); font-size:28px; color:var(--gold-soft); margin-bottom:6px; }
+  .wish-hint{
+    font-size:11px; letter-spacing:0.25em; text-transform:uppercase; color:var(--ink-soft);
     animation:pulseHint 2s ease-in-out infinite;
   }
   @keyframes pulseHint{ 0%,100%{opacity:0.55;} 50%{opacity:1;} }
@@ -71,16 +101,16 @@
   .doors{ display:flex; gap:26px; flex-wrap:wrap; justify-content:center; }
   .door{
     flex:1 1 260px; max-width:320px; background:var(--cream); border-radius:26px; padding:34px 26px;
-    text-decoration:none; color:var(--ink); box-shadow:0 24px 50px -28px rgba(74,58,74,0.28);
+    text-decoration:none; color:var(--ink); box-shadow:0 24px 50px -28px rgba(0,0,0,0.5);
     transition:transform 0.25s ease, box-shadow 0.25s ease; border-top:5px solid var(--accent);
     display:flex; flex-direction:column; align-items:center;
   }
-  .door:hover{ transform:translateY(-6px); box-shadow:0 30px 60px -26px rgba(74,58,74,0.38); }
+  .door:hover{ transform:translateY(-6px); box-shadow:0 30px 60px -26px rgba(0,0,0,0.6); }
   .door.christian{ --accent:var(--lilac); }
   .door.hindu{ --accent:var(--rose); }
   .door-icon{
     width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-    background:color-mix(in srgb, var(--accent) 16%, white); font-size:26px; margin-bottom:16px;
+    background:color-mix(in srgb, var(--accent) 22%, #1B1428); font-size:26px; margin-bottom:16px;
   }
   .door h2{ font-family:var(--serif); font-style:italic; font-size:23px; margin:0 0 6px; }
   .door .door-date{ font-size:12.5px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
@@ -96,7 +126,7 @@
   .music-btn{
     position:fixed; bottom:22px; right:22px; width:52px; height:52px; border-radius:50%; border:none;
     background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer;
-    box-shadow:0 10px 26px -10px rgba(74,58,74,0.4); transition:transform 0.25s ease; z-index:10;
+    box-shadow:0 10px 26px -10px rgba(0,0,0,0.5); transition:transform 0.25s ease; z-index:10;
   }
   .music-btn:hover{ transform:scale(1.06); }
   .music-btn .bars{ display:flex; align-items:flex-end; gap:2.5px; height:16px; }
@@ -115,21 +145,31 @@
 
 <div class="blob blob1"></div>
 <div class="blob blob2"></div>
+<div id="starLayer"></div>
 <div id="flowerLayer"></div>
 
-<!-- ================= COVER (FIRST PAGE) ================= -->
-<div class="cover" id="cover" onclick="openCover()">
-  <div class="cover-ring"><span class="cover-mono">P&amp;J</span></div>
-  <div class="cover-script">Save the Date</div>
-  <div class="cover-names">Poorani &amp; Jestin</div>
-  <div class="cover-hint">Tap to open</div>
+<!-- ================= COVER (FIRST PAGE): wish upon a star ================= -->
+<div class="wish-overlay" id="cover" onclick="openCover()">
+  <div class="shooting-star"></div>
+  <div class="shooting-star s2"></div>
+  <div class="shooting-star s3"></div>
+  <div class="wish-star-wrap">
+    <div class="wish-burst"></div>
+    <svg viewBox="0 0 51 48" xmlns="http://www.w3.org/2000/svg">
+      <path d="M25.5 0L31.2 17.5H49.7L34.8 28.3L40.4 45.8L25.5 35L10.6 45.8L16.2 28.3L1.3 17.5H19.8Z" fill="#E3B75B"/>
+    </svg>
+  </div>
+  <div class="wish-seal">
+    <div class="wish-names">Jestin &amp; Poorani</div>
+    <div class="wish-hint">Make a wish &mdash; tap the star</div>
+  </div>
 </div>
 
 <!-- ================= SITE ================= -->
 <div class="site" id="site">
   <div class="wrap">
     <div class="eyebrow">Save the Date</div>
-    <h1 class="names">Poorani <span class="amp">&amp;</span> Jestin</h1>
+    <h1 class="names">Jestin <span class="amp">&amp;</span> Poorani</h1>
     <div class="tagline">Two ceremonies, two traditions — choose a celebration to explore</div>
 
     <div class="doors">
@@ -160,20 +200,39 @@
 <button class="music-btn paused" id="musicBtn" onclick="toggleMusic()">
   <div class="bars" id="musicBars"><span></span><span></span><span></span></div>
 </button>
-<audio id="bgAudio" src="uyirey.mp3" loop preload="auto"></audio>
+<audio id="bgAudio" src="mundhinam.mp3" loop preload="auto"></audio>
 
 <script>
 /* ---------- Cover open ---------- */
 function openCover(){
   const cover = document.getElementById('cover');
   const site = document.getElementById('site');
-  cover.classList.add('hidden');
+  if(cover.classList.contains('open')) return;
+  cover.classList.add('open');
   site.classList.add('revealed');
   document.body.style.overflow = 'auto';
   // a real click is a user gesture: try starting music right away if nothing was already playing
   if(!musicOn){ toggleMusic(); }
+  setTimeout(()=>{ cover.style.display = 'none'; }, 1150);
 }
 document.body.style.overflow = 'hidden';
+
+/* ---------- Dreamy twinkling stars ---------- */
+(function initStars(){
+  const layer = document.getElementById('starLayer');
+  const count = 40;
+  for(let i=0;i<count;i++){
+    const el = document.createElement('span');
+    el.className = 'star';
+    const size = 1.5 + Math.random()*2.5;
+    el.style.width = size+'px'; el.style.height = size+'px';
+    el.style.left = (Math.random()*100)+'vw';
+    el.style.top = (Math.random()*100)+'vh';
+    el.style.animationDuration = (2 + Math.random()*3)+'s';
+    el.style.animationDelay = (-Math.random()*5)+'s';
+    layer.appendChild(el);
+  }
+})();
 
 /* ---------- Flower shower ---------- */
 (function initFlowers(){
