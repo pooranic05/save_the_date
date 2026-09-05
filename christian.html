@@ -8,9 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Poppins:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#EFEAFA; --ink-soft:#B3A9CF; --cream:#2B2140;
-    --page-grad: linear-gradient(160deg, #1B1428 0%, #241B36 45%, #2A2140 100%);
-    --accent:#A78BE0; --accent-soft:#3B2E55; --gold:#E3B75B; --gold-soft:#F6E3BE;
+    --ink:#4A3B5C; --ink-soft:#8B7A98; --cream:#FAF5EA;
+    --page-grad: linear-gradient(160deg, #F6D6B8 0%, #E3C2D2 50%, #A98AC9 100%);
+    --accent:#8B6FB8; --accent-soft:#EFE7F6; --gold:#D9A441; --gold-soft:#F6E3BE;
     --serif:'Playfair Display', serif; --script:'Parisienne', cursive;
     --body-font:'Poppins', sans-serif; --italic:'Cormorant Garamond', serif;
   }
@@ -18,7 +18,7 @@
   html{scroll-behavior:smooth;}
   html,body{margin:0;padding:0;}
   body{ font-family:var(--body-font); background:var(--page-grad); color:var(--ink); overflow-x:hidden; position:relative; }
-  ::selection{ background:var(--gold-soft); color:#2B2140; }
+  ::selection{ background:var(--gold-soft); color:var(--ink); }
 
   .blob{ position:fixed; border-radius:50%; filter:blur(70px); opacity:0.3; z-index:0; }
   .blob1{ width:380px; height:380px; top:-130px; left:-110px; background:var(--accent); }
@@ -34,7 +34,7 @@
 
   .home-link{
     position:fixed; top:18px; left:18px; z-index:20; text-decoration:none;
-    background:rgba(43,33,64,0.85); backdrop-filter:blur(6px); color:var(--ink);
+    background:rgba(255,255,255,0.85); backdrop-filter:blur(6px); color:var(--ink);
     font-size:12px; font-weight:600; padding:9px 16px; border-radius:999px;
     box-shadow:0 8px 20px -10px rgba(0,0,0,0.25);
   }
@@ -49,7 +49,7 @@
   header.hero{ padding-top:70px; padding-bottom:50px; }
   .hero-photo{
     width:260px; height:260px; border-radius:50%; overflow:hidden; margin:0 auto 26px;
-    border:6px solid var(--gold-soft); box-shadow:0 26px 60px -24px rgba(0,0,0,0.6);
+    border:6px solid var(--gold-soft); box-shadow:0 26px 60px -24px rgba(90,70,120,0.35);
   }
   .hero-photo img{ width:100%; height:100%; object-fit:cover; object-position:center 30%; }
   .names-hero{
@@ -73,7 +73,7 @@
   }
   .btn:hover{ transform:translateY(-2px); }
   .btn-gold{ background:linear-gradient(135deg, var(--gold-soft), var(--gold)); color:#4A2E1E; box-shadow:0 12px 26px -12px rgba(217,164,65,0.6); }
-  .btn-outline{ background:transparent; color:var(--ink); border:1.5px solid rgba(239,234,250,0.25); }
+  .btn-outline{ background:transparent; color:var(--ink); border:1.5px solid rgba(74,59,92,0.25); }
   .btn-outline:hover{ border-color:var(--accent); color:var(--accent); }
   .btn-small{ padding:9px 16px; font-size:11.5px; }
   .scroll-cue{ margin-top:46px; color:var(--accent); font-size:20px; animation:bounce 2s ease-in-out infinite; cursor:pointer; }
@@ -101,7 +101,7 @@
   .vine-card{ width:calc(50% - 40px); background:var(--accent-soft); border-radius:20px; padding:26px 24px; box-shadow:0 20px 44px -26px rgba(60,50,100,0.3); text-align:left; border-top:4px solid var(--accent); }
   .vine-item.left{ justify-content:flex-start; }
   .vine-item.right{ justify-content:flex-end; }
-  .tl-tag{ display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); background:rgba(255,255,255,0.10); padding:5px 14px; border-radius:999px; margin-bottom:12px; }
+  .tl-tag{ display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); background:rgba(255,255,255,0.7); padding:5px 14px; border-radius:999px; margin-bottom:12px; }
   .tl-title{ font-family:var(--serif); font-style:italic; font-size:22px; margin:0 0 4px; }
   .tl-desc{ font-size:13px; color:var(--ink-soft); margin-bottom:14px; }
   .tl-meta{ display:flex; flex-wrap:wrap; gap:8px 22px; margin-bottom:16px; }
@@ -218,7 +218,7 @@
           <div class="tl-desc">Morning vows and quiet blessings</div>
           <div class="tl-meta">
             <div><b>Date</b>Saturday, 2 January 2027</div>
-            <div><b>Time</b>9:00 AM</div>
+            <div><b>Time</b>9:30 AM</div>
             <div><b>Venue</b>St. Thomas Malankara Catholic Church, Chuvanamannu, Thrissur</div>
           </div>
           <div class="tl-actions">
@@ -239,7 +239,7 @@
           <div class="tl-desc">A joyful gathering of laughter, music, and celebration</div>
           <div class="tl-meta">
             <div><b>Date</b>Saturday, 2 January 2027</div>
-            <div><b>Time</b>10:00 AM</div>
+            <div><b>Time</b>12:00 PM</div>
             <div><b>Venue</b>Dream City Convention Center, Thrissur</div>
           </div>
           <div class="tl-actions">
@@ -293,7 +293,7 @@ function revealOnScroll(){
 revealOnScroll();
 
 (function countdown(){
-  const target = new Date('2027-01-02T09:00:00+05:30').getTime();
+  const target = new Date('2027-01-02T09:30:00+05:30').getTime();
   function tick(){
     const now = Date.now();
     let diff = Math.max(0, target - now);
@@ -328,12 +328,12 @@ function downloadIcs(){
   const ics = [
     'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Poorani and Jestin//Wedding//EN',
     'BEGIN:VEVENT','UID:christian-ceremony-poorani-jestin@savethedate',
-    'DTSTART:20270102T033000Z','DTEND:20270102T053000Z',
+    'DTSTART:20270102T040000Z','DTEND:20270102T060000Z',
     'SUMMARY:Poorani & Jestin - Christian Wedding Ceremony',
     'LOCATION:St. Thomas Malankara Catholic Church\\, Chuvanamannu\\, Thrissur',
     'DESCRIPTION:Wedding ceremony.','END:VEVENT',
     'BEGIN:VEVENT','UID:christian-reception-poorani-jestin@savethedate',
-    'DTSTART:20270102T043000Z','DTEND:20270102T070000Z',
+    'DTSTART:20270102T063000Z','DTEND:20270102T090000Z',
     'SUMMARY:Poorani & Jestin - Christian Wedding Reception',
     'LOCATION:Dream City Convention Center\\, Thrissur',
     'DESCRIPTION:Wedding reception.','END:VEVENT','END:VCALENDAR'
@@ -375,13 +375,14 @@ function schedulerTick(){
 function toggleMusic(){
   const btn=document.getElementById('musicBtn'), hint=document.getElementById('musicHint'), fileAudio=document.getElementById('bgAudio');
   if(!musicOn){
-    fileAudio.currentTime=0; fileAudio.volume=0.5;
+    fileAudio.volume=0.5;
     const p=fileAudio.play();
-    if(p!==undefined){ p.then(()=>{ musicOn=true; usingFile=true; btn.classList.remove('paused'); hint.textContent='now playing'; }).catch(()=>startGeneratedTune()); }
+    if(p!==undefined){ p.then(()=>{ musicOn=true; usingFile=true; btn.classList.remove('paused'); hint.textContent='now playing'; saveMusicState(); }).catch(()=>startGeneratedTune()); }
     else{ startGeneratedTune(); }
   } else {
     if(usingFile){ fileAudio.pause(); usingFile=false; } else { clearTimeout(scheduleTimer); }
     musicOn=false; btn.classList.add('paused'); hint.textContent='a little tune for you';
+    saveMusicState();
   }
 }
 function startGeneratedTune(){
@@ -391,7 +392,33 @@ function startGeneratedTune(){
   musicOn=true; usingFile=false;
   document.getElementById('musicBtn').classList.remove('paused');
   document.getElementById('musicHint').textContent='now playing';
+  saveMusicState();
 }
+
+/* ---------- Music persists across pages (best-effort; browsers may block autoplay) ---------- */
+const LS_PLAYING='stdMusicPlaying', LS_TIME='stdMusicTime';
+function saveMusicState(){
+  const fileAudio=document.getElementById('bgAudio');
+  try{
+    localStorage.setItem(LS_PLAYING, musicOn?'1':'0');
+    if(usingFile) localStorage.setItem(LS_TIME, String(fileAudio.currentTime||0));
+  }catch(e){}
+}
+function tryResumeMusic(){
+  let wasPlaying=false, savedTime=0;
+  try{ wasPlaying = localStorage.getItem(LS_PLAYING)==='1'; savedTime = parseFloat(localStorage.getItem(LS_TIME)||'0'); }catch(e){}
+  if(!wasPlaying) return;
+  const btn=document.getElementById('musicBtn'), hint=document.getElementById('musicHint'), fileAudio=document.getElementById('bgAudio');
+  fileAudio.currentTime = savedTime||0; fileAudio.volume=0.5;
+  const p=fileAudio.play();
+  const markPlaying=()=>{ musicOn=true; usingFile=true; btn.classList.remove('paused'); hint.textContent='now playing'; };
+  const markBlocked=()=>{ hint.textContent='tap to resume music'; };
+  if(p!==undefined){ p.then(markPlaying).catch(markBlocked); } else { markBlocked(); }
+}
+setInterval(()=>{ if(musicOn) saveMusicState(); }, 1500);
+window.addEventListener('pagehide', saveMusicState);
+document.addEventListener('visibilitychange', ()=>{ if(document.hidden) saveMusicState(); });
+tryResumeMusic();
 </script>
 </body>
 </html>
