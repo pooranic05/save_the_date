@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Poorani & Jestin | Christian Wedding</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Poppins:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#EFEAFA; --ink-soft:#B3A9CF; --cream:#2B2140;
+    --page-grad: linear-gradient(160deg, #1B1428 0%, #241B36 45%, #2A2140 100%);
+    --accent:#A78BE0; --accent-soft:#3B2E55; --gold:#E3B75B; --gold-soft:#F6E3BE;
+    --serif:'Playfair Display', serif; --script:'Parisienne', cursive;
+    --body-font:'Poppins', sans-serif; --italic:'Cormorant Garamond', serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{margin:0;padding:0;}
+  body{ font-family:var(--body-font); background:var(--page-grad); color:var(--ink); overflow-x:hidden; position:relative; }
+  ::selection{ background:var(--gold-soft); color:#2B2140; }
+
+  .blob{ position:fixed; border-radius:50%; filter:blur(70px); opacity:0.3; z-index:0; }
+  .blob1{ width:380px; height:380px; top:-130px; left:-110px; background:var(--accent); }
+  .blob2{ width:340px; height:340px; bottom:0; right:-130px; background:var(--gold); }
+
+  #flowerLayer{ position:fixed; inset:0; pointer-events:none; z-index:5; overflow:hidden; }
+  .petal{ position:absolute; top:-40px; opacity:0.8; animation-name:fall; animation-timing-function:linear; animation-iteration-count:infinite; }
+  @keyframes fall{
+    0%{ transform:translateY(-5vh) translateX(0) rotate(0deg); }
+    50%{ transform:translateY(52vh) translateX(24px) rotate(180deg); }
+    100%{ transform:translateY(110vh) translateX(-16px) rotate(360deg); }
+  }
+
+  .home-link{
+    position:fixed; top:18px; left:18px; z-index:20; text-decoration:none;
+    background:rgba(43,33,64,0.85); backdrop-filter:blur(6px); color:var(--ink);
+    font-size:12px; font-weight:600; padding:9px 16px; border-radius:999px;
+    box-shadow:0 8px 20px -10px rgba(0,0,0,0.25);
+  }
+
+  .site{ position:relative; z-index:2; }
+  section, header.hero{ position:relative; padding:90px 24px; max-width:780px; margin:0 auto; text-align:center; }
+  .eyebrow{ font-size:11.5px; font-weight:600; letter-spacing:0.32em; text-transform:uppercase; color:var(--accent); margin:0 0 14px; }
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity 0.9s ease, transform 0.9s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* HERO */
+  header.hero{ padding-top:70px; padding-bottom:50px; }
+  .hero-photo{
+    width:260px; height:260px; border-radius:50%; overflow:hidden; margin:0 auto 26px;
+    border:6px solid var(--gold-soft); box-shadow:0 26px 60px -24px rgba(0,0,0,0.6);
+  }
+  .hero-photo img{ width:100%; height:100%; object-fit:cover; object-position:center 30%; }
+  .names-hero{
+    font-family:var(--serif); font-style:italic; font-weight:600;
+    font-size:clamp(32px,7vw,50px); color:var(--ink); margin:0; line-height:1.15;
+  }
+  .names-hero .amp{ color:var(--gold); font-style:normal; font-family:var(--script); font-size:0.85em; padding:0 4px; }
+  .tagline{ font-family:var(--italic); font-style:italic; font-size:18px; color:var(--ink-soft); margin-top:6px; }
+
+  .countdown{ display:flex; gap:14px; justify-content:center; margin:34px 0 8px; flex-wrap:wrap; }
+  .cd-box{ background:var(--cream); border-radius:16px; padding:14px 18px; min-width:70px; box-shadow:0 14px 30px -18px rgba(60,50,100,0.3); }
+  .cd-num{ font-family:var(--serif); font-weight:700; font-size:26px; color:var(--accent); }
+  .cd-label{ font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft); margin-top:2px; }
+  .countdown-note{ font-size:12.5px; color:var(--ink-soft); margin-bottom:28px; }
+
+  .cta-row{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:10px; }
+  .btn{
+    font-family:var(--body-font); font-size:13px; font-weight:600; letter-spacing:0.04em;
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer; text-decoration:none;
+    padding:13px 26px; border-radius:999px; border:none; transition:transform 0.2s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-gold{ background:linear-gradient(135deg, var(--gold-soft), var(--gold)); color:#4A2E1E; box-shadow:0 12px 26px -12px rgba(217,164,65,0.6); }
+  .btn-outline{ background:transparent; color:var(--ink); border:1.5px solid rgba(239,234,250,0.25); }
+  .btn-outline:hover{ border-color:var(--accent); color:var(--accent); }
+  .btn-small{ padding:9px 16px; font-size:11.5px; }
+  .scroll-cue{ margin-top:46px; color:var(--accent); font-size:20px; animation:bounce 2s ease-in-out infinite; cursor:pointer; }
+  @keyframes bounce{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(8px); } }
+
+  /* MESSAGE */
+  .message-section{ background:var(--cream); }
+  .message-section p{ font-family:var(--italic); font-style:italic; font-weight:500; font-size:clamp(19px,3.4vw,23px); line-height:1.7; margin:0 0 22px; }
+  .signature{ margin-top:18px; font-family:var(--script); font-size:26px; color:var(--accent); }
+
+  /* TIMELINE */
+  .timeline-section{ max-width:900px; background:var(--cream); }
+  h2.section-title{ font-family:var(--serif); font-style:italic; font-weight:600; font-size:clamp(26px,5vw,36px); margin:4px 0 10px; }
+  .section-sub{ color:var(--ink-soft); font-size:14.5px; margin-bottom:20px; }
+
+  .vine{ position:relative; margin-top:50px; padding:10px 0; }
+  .vine::before{ content:''; position:absolute; left:50%; top:0; bottom:0; width:3px; transform:translateX(-50%); background:linear-gradient(180deg, var(--gold-soft), var(--gold), var(--gold-soft)); border-radius:3px; }
+  .vine-item{ position:relative; width:100%; display:flex; margin-bottom:54px; }
+  .vine-item:last-child{ margin-bottom:0; }
+  .vine-item .vine-node{
+    position:absolute; left:50%; top:18px; transform:translate(-50%,-50%); width:34px; height:34px; border-radius:50%;
+    background:var(--cream); border:3px solid var(--accent); display:flex; align-items:center; justify-content:center;
+    font-size:15px; z-index:2; box-shadow:0 4px 10px rgba(60,50,100,0.15);
+  }
+  .vine-card{ width:calc(50% - 40px); background:var(--accent-soft); border-radius:20px; padding:26px 24px; box-shadow:0 20px 44px -26px rgba(60,50,100,0.3); text-align:left; border-top:4px solid var(--accent); }
+  .vine-item.left{ justify-content:flex-start; }
+  .vine-item.right{ justify-content:flex-end; }
+  .tl-tag{ display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); background:rgba(255,255,255,0.10); padding:5px 14px; border-radius:999px; margin-bottom:12px; }
+  .tl-title{ font-family:var(--serif); font-style:italic; font-size:22px; margin:0 0 4px; }
+  .tl-desc{ font-size:13px; color:var(--ink-soft); margin-bottom:14px; }
+  .tl-meta{ display:flex; flex-wrap:wrap; gap:8px 22px; margin-bottom:16px; }
+  .tl-meta div{ font-size:13px; }
+  .tl-meta b{ display:block; font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; margin-bottom:2px; }
+  .tl-actions{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .qr-wrap{ display:flex; align-items:center; gap:8px; }
+  .qr-wrap img{ width:50px; height:50px; border-radius:8px; background:#fff; padding:2px; border:1px solid #eee; }
+  .qr-label{ font-size:10.5px; color:var(--ink-soft); }
+
+  @media(max-width:720px){
+    .vine::before{ left:16px; }
+    .vine-item, .vine-item.left, .vine-item.right{ justify-content:flex-start; padding-left:40px; }
+    .vine-item .vine-node{ left:16px; }
+    .vine-card{ width:100%; }
+  }
+
+  /* ATTIRE NOTE */
+  .attire-section .attire-card{
+    background:var(--cream); border-radius:22px; padding:30px 26px; margin-top:40px;
+    box-shadow:0 20px 44px -28px rgba(60,50,100,0.3);
+  }
+  .attire-card p{ font-size:13.5px; color:var(--ink-soft); margin:6px 0 0; }
+
+  /* CROSS LINK */
+  .cross-link{ background:var(--cream); text-align:center; padding:60px 24px; }
+  .cross-link a{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:#fff;
+    background:linear-gradient(135deg, #E8688F, #C2185B); padding:14px 28px; border-radius:999px;
+    font-size:13px; font-weight:600; box-shadow:0 14px 30px -14px rgba(194,24,91,0.5);
+  }
+  .cross-link p{ color:var(--ink-soft); font-size:13.5px; margin-bottom:16px; }
+
+  footer{ text-align:center; padding:60px 24px 46px; color:var(--ink-soft); }
+  footer .footer-names{ font-family:var(--script); font-size:30px; color:var(--accent); margin-bottom:10px; }
+  footer .copyright{ font-size:11.5px; margin-top:18px; opacity:0.75; }
+
+  .music-btn{
+    position:fixed; bottom:22px; right:22px; width:52px; height:52px; border-radius:50%; border:none;
+    background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer;
+    box-shadow:0 10px 26px -10px rgba(0,0,0,0.4); transition:transform 0.25s ease; z-index:10;
+  }
+  .music-btn:hover{ transform:scale(1.06); }
+  .music-btn .bars{ display:flex; align-items:flex-end; gap:2.5px; height:16px; }
+  .music-btn .bars span{ width:3px; background:var(--accent); border-radius:2px; animation:bar 1s ease-in-out infinite; }
+  .music-btn .bars span:nth-child(1){ height:6px; animation-delay:0s; }
+  .music-btn .bars span:nth-child(2){ height:14px; animation-delay:0.2s; }
+  .music-btn .bars span:nth-child(3){ height:9px; animation-delay:0.4s; }
+  @keyframes bar{ 0%,100%{ transform:scaleY(0.5); } 50%{ transform:scaleY(1); } }
+  .music-btn.paused .bars span{ animation-play-state:paused; }
+  .music-hint{ position:fixed; bottom:28px; right:82px; font-size:12px; color:var(--ink-soft); z-index:10; }
+
+  @media(max-width:600px){
+    section, header.hero{ padding:60px 18px; }
+    .vine-card{ padding:22px 18px; }
+    .music-hint{ display:none; }
+    .cd-box{ min-width:58px; padding:10px 12px; }
+    .cd-num{ font-size:21px; }
+    .hero-photo{ width:200px; height:200px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div id="flowerLayer"></div>
+<a class="home-link" href="index.html">← Home</a>
+
+<div class="site">
+
+  <header class="hero">
+    <div class="hero-photo reveal">
+      <img src="d89381a9-e6a9-4b5e-9f76-3facca8dae1c.jpg" alt="Poorani and Jestin illustrated as a bride and groom in Christian wedding attire">
+    </div>
+    <div class="eyebrow reveal">Christian Wedding</div>
+    <h1 class="names-hero reveal">Poorani <span class="amp">&amp;</span> Jestin</h1>
+    <div class="tagline reveal">A morning of sacred vows and quiet blessings</div>
+
+    <div class="countdown reveal" id="countdown">
+      <div class="cd-box"><div class="cd-num" id="cdDays">--</div><div class="cd-label">Days</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdHours">--</div><div class="cd-label">Hours</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdMins">--</div><div class="cd-label">Mins</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdSecs">--</div><div class="cd-label">Secs</div></div>
+    </div>
+    <div class="countdown-note reveal">until we say "I do" in Thrissur</div>
+
+    <div class="cta-row reveal">
+      <button class="btn btn-gold" onclick="downloadIcs()">＋ Add to Calendar</button>
+      <button class="btn btn-outline" onclick="sharePage()">↗ Share</button>
+    </div>
+    <div class="scroll-cue reveal" onclick="document.getElementById('message').scrollIntoView({behavior:'smooth'})">⌄</div>
+  </header>
+
+  <section class="message-section" id="message">
+    <div class="eyebrow reveal">With Joy In Our Hearts</div>
+    <p class="reveal">We warmly invite you to celebrate our wedding and share in this beautiful day with us.</p>
+    <p class="reveal">Join us for our Wedding filled with love, vows, hymns, and the blessing of our families.</p>
+    <p class="reveal">Your presence will turn this morning into a memory we will carry forever.</p>
+    <div class="signature reveal">With love, Poorani &amp; Jestin</div>
+  </section>
+
+  <section class="timeline-section" id="timeline">
+    <div class="eyebrow reveal">The Celebration</div>
+    <h2 class="section-title reveal">When &amp; Where</h2>
+    <div class="section-sub reveal">Join us for the Wedding, then the celebration that follows.</div>
+
+    <div class="vine">
+      <div class="vine-item left">
+        <div class="vine-node">✝</div>
+        <div class="vine-card reveal">
+          <span class="tl-tag">Ceremony</span>
+          <h3 class="tl-title">The Wedding</h3>
+          <div class="tl-desc">Morning vows and quiet blessings</div>
+          <div class="tl-meta">
+            <div><b>Date</b>Saturday, 2 January 2027</div>
+            <div><b>Time</b>9:00 AM</div>
+            <div><b>Venue</b>St. Thomas Malankara Catholic Church, Chuvanamannu, Thrissur</div>
+          </div>
+          <div class="tl-actions">
+            <a class="btn btn-outline btn-small" href="https://share.google/WbqeZf2eu8TxZfuwh" target="_blank" rel="noopener">📍 Directions</a>
+            <div class="qr-wrap">
+              <img loading="lazy" src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=https%3A%2F%2Fshare.google%2FWbqeZf2eu8TxZfuwh" alt="QR code to church location">
+              <span class="qr-label">Scan for<br>map</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vine-item right">
+        <div class="vine-node">🥂</div>
+        <div class="vine-card reveal">
+          <span class="tl-tag">Reception</span>
+          <h3 class="tl-title">The Reception</h3>
+          <div class="tl-desc">A joyful gathering of laughter, music, and celebration</div>
+          <div class="tl-meta">
+            <div><b>Date</b>Saturday, 2 January 2027</div>
+            <div><b>Time</b>10:00 AM</div>
+            <div><b>Venue</b>Dream City Convention Center, Thrissur</div>
+          </div>
+          <div class="tl-actions">
+            <a class="btn btn-outline btn-small" href="https://share.google/NOiemkJIcYiUWJsta" target="_blank" rel="noopener">📍 Directions</a>
+            <div class="qr-wrap">
+              <img loading="lazy" src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=https%3A%2F%2Fshare.google%2FNOiemkJIcYiUWJsta" alt="QR code to reception location">
+              <span class="qr-label">Scan for<br>map</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="attire-section">
+    <div class="eyebrow reveal">A Small Note</div>
+    <h2 class="section-title reveal">Attire &amp; RSVP</h2>
+    <div class="attire-card reveal">
+      <p><b>Attire</b> · Formal / Church Attire</p>
+      <p><b>RSVP</b> · Invitation to follow</p>
+    </div>
+  </section>
+
+  <div class="cross-link">
+    <p class="reveal">Also joining our Hindu wedding celebrations?</p>
+    <a class="reveal" href="hindu.html">🪔 View Hindu Wedding Invitation</a>
+  </div>
+
+  <footer>
+    <div class="footer-names reveal">Poorani &amp; Jestin</div>
+    <div class="reveal">We look forward to celebrating with you.</div>
+    <div class="copyright reveal">© 2027 Poorani &amp; Jestin · Made with love</div>
+  </footer>
+
+</div>
+
+<div class="music-hint" id="musicHint">a little tune for you</div>
+<button class="music-btn paused" id="musicBtn" onclick="toggleMusic()">
+  <div class="bars" id="musicBars"><span></span><span></span><span></span></div>
+</button>
+<audio id="bgAudio" src="uyirey.mp3" loop preload="auto"></audio>
+
+<script>
+function revealOnScroll(){
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  items.forEach(el=>io.observe(el));
+}
+revealOnScroll();
+
+(function countdown(){
+  const target = new Date('2027-01-02T09:00:00+05:30').getTime();
+  function tick(){
+    const now = Date.now();
+    let diff = Math.max(0, target - now);
+    const d = Math.floor(diff/86400000); diff -= d*86400000;
+    const h = Math.floor(diff/3600000); diff -= h*3600000;
+    const m = Math.floor(diff/60000); diff -= m*60000;
+    const s = Math.floor(diff/1000);
+    document.getElementById('cdDays').textContent = d;
+    document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cdMins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cdSecs').textContent = String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+(function initFlowers(){
+  const layer = document.getElementById('flowerLayer');
+  const blossoms = ['🤍','🌸','✿','❀','💮'];
+  const count = 16;
+  for(let i=0;i<count;i++){
+    const el = document.createElement('span');
+    el.className = 'petal';
+    el.textContent = blossoms[Math.floor(Math.random()*blossoms.length)];
+    const left = Math.random()*100, size = 13+Math.random()*15, duration = 10+Math.random()*9, delay = Math.random()*duration;
+    el.style.left = left+'vw'; el.style.fontSize = size+'px';
+    el.style.animationDuration = duration+'s'; el.style.animationDelay = '-'+delay+'s';
+    layer.appendChild(el);
+  }
+})();
+
+function downloadIcs(){
+  const ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Poorani and Jestin//Wedding//EN',
+    'BEGIN:VEVENT','UID:christian-ceremony-poorani-jestin@savethedate',
+    'DTSTART:20270102T033000Z','DTEND:20270102T053000Z',
+    'SUMMARY:Poorani & Jestin - Christian Wedding Ceremony',
+    'LOCATION:St. Thomas Malankara Catholic Church\\, Chuvanamannu\\, Thrissur',
+    'DESCRIPTION:Wedding ceremony.','END:VEVENT',
+    'BEGIN:VEVENT','UID:christian-reception-poorani-jestin@savethedate',
+    'DTSTART:20270102T043000Z','DTEND:20270102T070000Z',
+    'SUMMARY:Poorani & Jestin - Christian Wedding Reception',
+    'LOCATION:Dream City Convention Center\\, Thrissur',
+    'DESCRIPTION:Wedding reception.','END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics], {type:'text/calendar'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'Poorani-Jestin-Christian-Wedding.ics';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+function sharePage(){
+  const shareData = { title: 'Poorani & Jestin — Christian Wedding', text: "You're invited to Poorani & Jestin's Christian wedding ceremony!", url: window.location.href };
+  if(navigator.share){ navigator.share(shareData).catch(()=>{}); }
+  else{ navigator.clipboard.writeText(shareData.url).then(()=>alert('Link copied to clipboard!')).catch(()=>prompt('Copy this link:', shareData.url)); }
+}
+
+let audioCtx=null, musicOn=false, scheduleTimer=null, nextNoteTime=0, usingFile=false;
+const tempo=88, noteLen=60/tempo;
+const phrase=[{n:'C4',d:1},{n:'E4',d:1},{n:'G4',d:1},{n:'B4',d:1},{n:'A4',d:1},{n:'G4',d:2},{n:'D4',d:1},{n:'C4',d:2}];
+const freqs={C4:261.63,D4:293.66,E4:329.63,G4:392.0,A4:440.0,B4:493.88,C5:523.25};
+function scheduleNote(freq,time,dur){
+  const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
+  osc.type='sine'; osc.frequency.value=freq;
+  const osc2=audioCtx.createOscillator(); osc2.type='triangle'; osc2.frequency.value=freq/2;
+  const gain2=audioCtx.createGain();
+  gain.gain.setValueAtTime(0.0001,time); gain.gain.exponentialRampToValueAtTime(0.09,time+0.08); gain.gain.exponentialRampToValueAtTime(0.0001,time+dur*0.95);
+  gain2.gain.setValueAtTime(0.0001,time); gain2.gain.exponentialRampToValueAtTime(0.035,time+0.1); gain2.gain.exponentialRampToValueAtTime(0.0001,time+dur*0.95);
+  osc.connect(gain).connect(audioCtx.destination); osc2.connect(gain2).connect(audioCtx.destination);
+  osc.start(time); osc.stop(time+dur); osc2.start(time); osc2.stop(time+dur);
+}
+let phraseIndex=0;
+function schedulerTick(){
+  while(nextNoteTime < audioCtx.currentTime+1.0){
+    const step=phrase[phraseIndex%phrase.length]; const dur=step.d*noteLen;
+    scheduleNote(freqs[step.n], nextNoteTime, dur*0.9); nextNoteTime+=dur; phraseIndex++;
+  }
+  scheduleTimer=setTimeout(schedulerTick,200);
+}
+function toggleMusic(){
+  const btn=document.getElementById('musicBtn'), hint=document.getElementById('musicHint'), fileAudio=document.getElementById('bgAudio');
+  if(!musicOn){
+    fileAudio.currentTime=0; fileAudio.volume=0.5;
+    const p=fileAudio.play();
+    if(p!==undefined){ p.then(()=>{ musicOn=true; usingFile=true; btn.classList.remove('paused'); hint.textContent='now playing'; }).catch(()=>startGeneratedTune()); }
+    else{ startGeneratedTune(); }
+  } else {
+    if(usingFile){ fileAudio.pause(); usingFile=false; } else { clearTimeout(scheduleTimer); }
+    musicOn=false; btn.classList.add('paused'); hint.textContent='a little tune for you';
+  }
+}
+function startGeneratedTune(){
+  if(!audioCtx){ audioCtx=new (window.AudioContext||window.webkitAudioContext)(); }
+  if(audioCtx.state==='suspended'){ audioCtx.resume(); }
+  nextNoteTime=audioCtx.currentTime+0.1; phraseIndex=0; schedulerTick();
+  musicOn=true; usingFile=false;
+  document.getElementById('musicBtn').classList.remove('paused');
+  document.getElementById('musicHint').textContent='now playing';
+}
+</script>
+</body>
+</html>

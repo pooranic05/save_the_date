@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Poorani & Jestin | Hindu Wedding</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Poppins:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#FBEAF0; --ink-soft:#D3A0B6; --cream:#3A1526;
+    --page-grad: linear-gradient(160deg, #24101B 0%, #3A1526 55%, #3D2712 100%);
+    --accent:#E8688F; --accent-soft:#4A1F30; --gold:#E3B75B; --gold-soft:#F6E3BE;
+    --serif:'Playfair Display', serif; --script:'Parisienne', cursive;
+    --body-font:'Poppins', sans-serif; --italic:'Cormorant Garamond', serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{margin:0;padding:0;}
+  body{ font-family:var(--body-font); background:var(--page-grad); color:var(--ink); overflow-x:hidden; position:relative; }
+  ::selection{ background:var(--gold-soft); color:#3A1526; }
+
+  .blob{ position:fixed; border-radius:50%; filter:blur(70px); opacity:0.3; z-index:0; }
+  .blob1{ width:380px; height:380px; top:-130px; left:-110px; background:var(--accent); }
+  .blob2{ width:340px; height:340px; bottom:0; right:-130px; background:var(--gold); }
+
+  #flowerLayer{ position:fixed; inset:0; pointer-events:none; z-index:5; overflow:hidden; }
+  .petal{ position:absolute; top:-40px; opacity:0.85; animation-name:fall; animation-timing-function:linear; animation-iteration-count:infinite; }
+  @keyframes fall{
+    0%{ transform:translateY(-5vh) translateX(0) rotate(0deg); }
+    50%{ transform:translateY(52vh) translateX(24px) rotate(180deg); }
+    100%{ transform:translateY(110vh) translateX(-16px) rotate(360deg); }
+  }
+
+  .home-link{
+    position:fixed; top:18px; left:18px; z-index:20; text-decoration:none;
+    background:rgba(58,21,38,0.85); backdrop-filter:blur(6px); color:var(--ink);
+    font-size:12px; font-weight:600; padding:9px 16px; border-radius:999px;
+    box-shadow:0 8px 20px -10px rgba(0,0,0,0.25);
+  }
+
+  .site{ position:relative; z-index:2; }
+  section, header.hero{ position:relative; padding:90px 24px; max-width:780px; margin:0 auto; text-align:center; }
+  .eyebrow{ font-size:11.5px; font-weight:600; letter-spacing:0.32em; text-transform:uppercase; color:var(--accent); margin:0 0 14px; }
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity 0.9s ease, transform 0.9s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* HERO ILLUSTRATION */
+  header.hero{ padding-top:60px; padding-bottom:50px; }
+  .illustration-wrap{ position:relative; width:280px; height:230px; margin:0 auto 10px; }
+  .illustration-wrap svg{ width:100%; height:100%; overflow:visible; }
+  .float-heart{ animation:floatHeart 3.2s ease-in-out infinite; transform-origin:center; }
+  .float-heart.d2{ animation-delay:0.6s; } .float-heart.d3{ animation-delay:1.2s; }
+  @keyframes floatHeart{ 0%,100%{ transform:translateY(0) scale(1); opacity:0.85; } 50%{ transform:translateY(-10px) scale(1.12); opacity:1; } }
+  .sparkle{ animation:twinkle 1.8s ease-in-out infinite; transform-origin:center; }
+  .sparkle.d2{ animation-delay:0.5s; } .sparkle.d3{ animation-delay:1s; }
+  @keyframes twinkle{ 0%,100%{ opacity:0.25; transform:scale(0.7); } 50%{ opacity:1; transform:scale(1.1); } }
+  .dance{ animation:sway 2.6s ease-in-out infinite; transform-origin:bottom center; }
+  @keyframes sway{ 0%,100%{ transform:rotate(-2deg); } 50%{ transform:rotate(2deg); } }
+
+  .names-hero{
+    font-family:var(--serif); font-style:italic; font-weight:600;
+    font-size:clamp(32px,7vw,50px); color:var(--ink); margin:0; line-height:1.15;
+  }
+  .names-hero .amp{ color:var(--gold); font-style:normal; font-family:var(--script); font-size:0.85em; padding:0 4px; }
+  .tagline{ font-family:var(--italic); font-style:italic; font-size:18px; color:var(--ink-soft); margin-top:6px; }
+
+  .countdown{ display:flex; gap:14px; justify-content:center; margin:34px 0 8px; flex-wrap:wrap; }
+  .cd-box{ background:var(--cream); border-radius:16px; padding:14px 18px; min-width:70px; box-shadow:0 14px 30px -18px rgba(90,30,60,0.3); }
+  .cd-num{ font-family:var(--serif); font-weight:700; font-size:26px; color:var(--accent); }
+  .cd-label{ font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft); margin-top:2px; }
+  .countdown-note{ font-size:12.5px; color:var(--ink-soft); margin-bottom:28px; }
+
+  .cta-row{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:10px; }
+  .btn{
+    font-family:var(--body-font); font-size:13px; font-weight:600; letter-spacing:0.04em;
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer; text-decoration:none;
+    padding:13px 26px; border-radius:999px; border:none; transition:transform 0.2s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-gold{ background:linear-gradient(135deg, var(--gold-soft), var(--gold)); color:#4A2E1E; box-shadow:0 12px 26px -12px rgba(217,164,65,0.6); }
+  .btn-outline{ background:transparent; color:var(--ink); border:1.5px solid rgba(251,234,240,0.25); }
+  .btn-outline:hover{ border-color:var(--accent); color:var(--accent); }
+  .btn-small{ padding:9px 16px; font-size:11.5px; }
+  .scroll-cue{ margin-top:46px; color:var(--accent); font-size:20px; animation:bounce 2s ease-in-out infinite; cursor:pointer; }
+  @keyframes bounce{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(8px); } }
+
+  /* MESSAGE */
+  .message-section{ background:var(--cream); }
+  .message-section p{ font-family:var(--italic); font-style:italic; font-weight:500; font-size:clamp(19px,3.4vw,23px); line-height:1.7; margin:0 0 22px; }
+  .signature{ margin-top:18px; font-family:var(--script); font-size:26px; color:var(--accent); }
+
+  /* DETAILS CARD (single event) */
+  .details-section{ max-width:640px; background:var(--cream); }
+  h2.section-title{ font-family:var(--serif); font-style:italic; font-weight:600; font-size:clamp(26px,5vw,36px); margin:4px 0 10px; }
+  .section-sub{ color:var(--ink-soft); font-size:14.5px; margin-bottom:20px; }
+  .event-card{
+    text-align:left; background:var(--accent-soft); border-radius:22px; padding:32px 30px; margin-top:40px;
+    box-shadow:0 22px 48px -28px rgba(90,30,60,0.35); border-top:5px solid var(--accent);
+  }
+  .tl-tag{ display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); background:rgba(255,255,255,0.10); padding:5px 14px; border-radius:999px; margin-bottom:12px; }
+  .tl-title{ font-family:var(--serif); font-style:italic; font-size:24px; margin:0 0 4px; }
+  .tl-desc{ font-size:13.5px; color:var(--ink-soft); margin-bottom:16px; }
+  .tl-meta{ display:flex; flex-wrap:wrap; gap:10px 26px; margin-bottom:18px; }
+  .tl-meta div{ font-size:13.5px; }
+  .tl-meta b{ display:block; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; margin-bottom:3px; }
+  .tl-actions{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .qr-wrap{ display:flex; align-items:center; gap:10px; }
+  .qr-wrap img{ width:56px; height:56px; border-radius:8px; background:#fff; padding:3px; border:1px solid #eee; }
+  .qr-label{ font-size:11px; color:var(--ink-soft); }
+
+  .attire-section .attire-card{
+    background:var(--cream); border-radius:22px; padding:30px 26px; margin-top:40px;
+    box-shadow:0 20px 44px -28px rgba(90,30,60,0.3);
+  }
+  .attire-card p{ font-size:13.5px; color:var(--ink-soft); margin:6px 0 0; }
+
+  .cross-link{ background:var(--cream); text-align:center; padding:60px 24px; }
+  .cross-link a{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:#fff;
+    background:linear-gradient(135deg, #9B8AD1, #8577C2); padding:14px 28px; border-radius:999px;
+    font-size:13px; font-weight:600; box-shadow:0 14px 30px -14px rgba(133,119,194,0.5);
+  }
+  .cross-link p{ color:var(--ink-soft); font-size:13.5px; margin-bottom:16px; }
+
+  footer{ text-align:center; padding:60px 24px 46px; color:var(--ink-soft); }
+  footer .footer-names{ font-family:var(--script); font-size:30px; color:var(--accent); margin-bottom:10px; }
+  footer .copyright{ font-size:11.5px; margin-top:18px; opacity:0.75; }
+
+  .music-btn{
+    position:fixed; bottom:22px; right:22px; width:52px; height:52px; border-radius:50%; border:none;
+    background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer;
+    box-shadow:0 10px 26px -10px rgba(0,0,0,0.4); transition:transform 0.25s ease; z-index:10;
+  }
+  .music-btn:hover{ transform:scale(1.06); }
+  .music-btn .bars{ display:flex; align-items:flex-end; gap:2.5px; height:16px; }
+  .music-btn .bars span{ width:3px; background:var(--accent); border-radius:2px; animation:bar 1s ease-in-out infinite; }
+  .music-btn .bars span:nth-child(1){ height:6px; animation-delay:0s; }
+  .music-btn .bars span:nth-child(2){ height:14px; animation-delay:0.2s; }
+  .music-btn .bars span:nth-child(3){ height:9px; animation-delay:0.4s; }
+  @keyframes bar{ 0%,100%{ transform:scaleY(0.5); } 50%{ transform:scaleY(1); } }
+  .music-btn.paused .bars span{ animation-play-state:paused; }
+  .music-hint{ position:fixed; bottom:28px; right:82px; font-size:12px; color:var(--ink-soft); z-index:10; }
+
+  @media(max-width:600px){
+    section, header.hero{ padding:60px 18px; }
+    .event-card{ padding:24px 20px; }
+    .music-hint{ display:none; }
+    .cd-box{ min-width:58px; padding:10px 12px; }
+    .cd-num{ font-size:21px; }
+    .illustration-wrap{ width:220px; height:180px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div id="flowerLayer"></div>
+<a class="home-link" href="index.html">← Home</a>
+
+<div class="site">
+
+  <header class="hero">
+    <div class="illustration-wrap reveal">
+      <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+        <g class="sparkle" fill="#D9A441"><path d="M30 30 L33 38 L41 41 L33 44 L30 52 L27 44 L19 41 L27 38 Z"/></g>
+        <g class="sparkle d2" fill="#C2185B"><path d="M205 25 L207 31 L213 33 L207 35 L205 41 L203 35 L197 33 L203 31 Z"/></g>
+        <g class="sparkle d3" fill="#D9A441"><path d="M215 90 L217 95 L222 97 L217 99 L215 104 L213 99 L208 97 L213 95 Z"/></g>
+
+        <path class="float-heart" fill="#C2185B" d="M40 75c-4-6-13-4-13 3 0 6 8 11 13 15 5-4 13-9 13-15 0-7-9-9-13-3Z"/>
+        <path class="float-heart d3" fill="#D9A441" d="M198 65c-3-5-11-3-11 2 0 5 7 9 11 12 4-3 11-7 11-12 0-5-8-7-11-2Z"/>
+        <path class="float-heart d2" fill="#C2185B" d="M120 20c-3-5-10-3-10 2 0 5 6 8 10 11 4-3 10-6 10-11 0-5-7-7-10-2Z"/>
+
+        <ellipse cx="120" cy="182" rx="70" ry="8" fill="#4A2030" opacity="0.12"/>
+
+        <g class="dance">
+          <path d="M100 130 Q120 142 140 130" stroke="#EAC9A0" stroke-width="7" fill="none" stroke-linecap="round"/>
+
+          <!-- BRIDE: purple lehenga + gold dupatta trim -->
+          <g>
+            <path d="M84 50 Q55 90 66 152 L78 150 Q70 100 92 58 Z" fill="#6B4BA0" opacity="0.9"/>
+            <path d="M84 50 Q55 90 66 152 L78 150 Q70 100 92 58 Z" fill="none" stroke="#D9A441" stroke-width="1.4" stroke-dasharray="2 3"/>
+            <path d="M64 98 C50 122 44 152 40 178 L112 178 C108 152 102 122 90 98 Z" fill="#8577C2"/>
+            <path d="M46 150 Q80 140 106 150" fill="none" stroke="#D9A441" stroke-width="2"/>
+            <path d="M42 168 Q80 156 108 168" fill="none" stroke="#D9A441" stroke-width="2"/>
+            <path d="M40 178 Q76 168 112 178" fill="none" stroke="#F3D98B" stroke-width="3"/>
+            <path d="M70 96 Q80 88 90 96 L93 118 Q80 126 67 118 Z" fill="#6B4BA0"/>
+            <path d="M70 96 Q80 90 90 96" fill="none" stroke="#D9A441" stroke-width="1.4"/>
+            <path d="M90 112 Q100 124 100 130" stroke="#F4D6C0" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <circle cx="96" cy="122" r="1.8" fill="none" stroke="#D9A441" stroke-width="1.2"/>
+            <rect x="75" y="80" width="10" height="12" rx="4" fill="#F4D6C0"/>
+            <circle cx="80" cy="66" r="19" fill="#F4D6C0"/>
+            <path d="M61 62 Q60 40 80 40 Q100 40 99 62 Q99 50 80 50 Q61 50 61 62Z" fill="#2B2130"/>
+            <circle cx="80" cy="42" r="7" fill="#2B2130"/>
+            <circle cx="75" cy="39" r="1.4" fill="#FFFFFF"/><circle cx="80" cy="37" r="1.4" fill="#FFFFFF"/><circle cx="85" cy="39" r="1.4" fill="#FFFFFF"/>
+            <circle cx="80" cy="60" r="1.6" fill="#C2185B"/>
+            <circle cx="74" cy="67" r="1.6" fill="#3A2E42"/>
+            <circle cx="86" cy="67" r="1.6" fill="#3A2E42"/>
+            <path d="M75 74 Q80 78 85 74" stroke="#B5637E" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+            <circle cx="68" cy="71" r="3" fill="#F3AFC0" opacity="0.6"/>
+            <circle cx="92" cy="71" r="3" fill="#F3AFC0" opacity="0.6"/>
+            <circle cx="80" cy="50" r="1.4" fill="#D9A441"/>
+          </g>
+
+          <!-- GROOM: black suit -->
+          <g>
+            <path d="M148 150 L146 176 L156 176 L158 150 Z" fill="#232028"/>
+            <path d="M170 150 L168 176 L178 176 L180 150 Z" fill="#232028"/>
+            <path d="M144 100 C140 118 140 136 142 150 L182 150 C184 136 184 118 180 100 Z" fill="#232028"/>
+            <path d="M155 100 L163 116 L171 100 Z" fill="#FFFFFF"/>
+            <circle cx="163" cy="103" r="4" fill="#C2185B"/>
+            <path d="M155 100 L146 118 L159 116 Z" fill="#141216"/>
+            <path d="M171 100 L180 118 L167 116 Z" fill="#141216"/>
+            <path d="M150 112 Q140 122 140 130" stroke="#232028" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <rect x="158" y="82" width="10" height="12" rx="4" fill="#E8B98C"/>
+            <circle cx="163" cy="68" r="18" fill="#E8B98C"/>
+            <path d="M146 66 Q144 48 163 47 Q182 48 180 66 Q178 54 163 54 Q148 54 146 66Z" fill="#1E1A22"/>
+            <circle cx="157" cy="69" r="1.6" fill="#3A2E42"/>
+            <circle cx="169" cy="69" r="1.6" fill="#3A2E42"/>
+            <path d="M158 76 Q163 79 168 76" stroke="#7A4A3A" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="eyebrow reveal">Hindu Wedding</div>
+    <h1 class="names-hero reveal">Poorani <span class="amp">&amp;</span> Jestin</h1>
+    <div class="tagline reveal">Sacred vows in traditional South Indian style</div>
+
+    <div class="countdown reveal" id="countdown">
+      <div class="cd-box"><div class="cd-num" id="cdDays">--</div><div class="cd-label">Days</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdHours">--</div><div class="cd-label">Hours</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdMins">--</div><div class="cd-label">Mins</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdSecs">--</div><div class="cd-label">Secs</div></div>
+    </div>
+    <div class="countdown-note reveal">until our Muhurtham in Trichy</div>
+
+    <div class="cta-row reveal">
+      <button class="btn btn-gold" onclick="downloadIcs()">＋ Add to Calendar</button>
+      <button class="btn btn-outline" onclick="sharePage()">↗ Share</button>
+    </div>
+    <div class="scroll-cue reveal" onclick="document.getElementById('message').scrollIntoView({behavior:'smooth'})">⌄</div>
+  </header>
+
+  <section class="message-section" id="message">
+    <div class="eyebrow reveal">With Joy In Our Hearts</div>
+    <p class="reveal">We warmly invite you to celebrate our wedding and share in this beautiful day with us.</p>
+    <p class="reveal">Join us for the Muhurtham — a sacred ceremony with holy fire, mantras, and rituals honoring our elders.</p>
+    <p class="reveal">Your presence will turn this day into a memory we will carry forever.</p>
+    <div class="signature reveal">With love, Poorani &amp; Jestin</div>
+  </section>
+
+  <section class="details-section" id="details">
+    <div class="eyebrow reveal">The Celebration</div>
+    <h2 class="section-title reveal">When &amp; Where</h2>
+    <div class="section-sub reveal">An auspicious hour, chosen with care.</div>
+
+    <div class="event-card reveal">
+      <span class="tl-tag">Ceremony · Muhurtham</span>
+      <h3 class="tl-title">The Wedding Ceremony</h3>
+      <div class="tl-desc">Sacred vows in traditional South Indian style</div>
+      <div class="tl-meta">
+        <div><b>Date</b>Wednesday, 20 January 2027</div>
+        <div><b>Time</b>9:00 AM</div>
+        <div><b>Venue</b>Balaji Wedding Hall, Manachanallur, Trichy, Tamil Nadu</div>
+      </div>
+      <div class="tl-actions">
+        <a class="btn btn-outline btn-small" href="https://share.google/AkiBAd2lYMHq3ThIQ" target="_blank" rel="noopener">📍 Directions</a>
+        <div class="qr-wrap">
+          <img loading="lazy" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https%3A%2F%2Fshare.google%2FAkiBAd2lYMHq3ThIQ" alt="QR code to wedding hall location">
+          <span class="qr-label">Scan for<br>map</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="attire-section">
+    <div class="eyebrow reveal">A Small Note</div>
+    <h2 class="section-title reveal">Attire &amp; RSVP</h2>
+    <div class="attire-card reveal">
+      <p><b>Attire</b> · Traditional South Indian Attire</p>
+      <p><b>RSVP</b> · Invitation to follow</p>
+    </div>
+  </section>
+
+  <div class="cross-link">
+    <p class="reveal">Also joining our Christian wedding celebrations?</p>
+    <a class="reveal" href="christian.html">✝️ View Christian Wedding Invitation</a>
+  </div>
+
+  <footer>
+    <div class="footer-names reveal">Poorani &amp; Jestin</div>
+    <div class="reveal">We look forward to celebrating with you.</div>
+    <div class="copyright reveal">© 2027 Poorani &amp; Jestin · Made with love</div>
+  </footer>
+
+</div>
+
+<div class="music-hint" id="musicHint">a little tune for you</div>
+<button class="music-btn paused" id="musicBtn" onclick="toggleMusic()">
+  <div class="bars" id="musicBars"><span></span><span></span><span></span></div>
+</button>
+<audio id="bgAudio" src="uyirey.mp3" loop preload="auto"></audio>
+
+<script>
+function revealOnScroll(){
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  items.forEach(el=>io.observe(el));
+}
+revealOnScroll();
+
+(function countdown(){
+  const target = new Date('2027-01-20T09:00:00+05:30').getTime();
+  function tick(){
+    const now = Date.now();
+    let diff = Math.max(0, target - now);
+    const d = Math.floor(diff/86400000); diff -= d*86400000;
+    const h = Math.floor(diff/3600000); diff -= h*3600000;
+    const m = Math.floor(diff/60000); diff -= m*60000;
+    const s = Math.floor(diff/1000);
+    document.getElementById('cdDays').textContent = d;
+    document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cdMins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cdSecs').textContent = String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+(function initFlowers(){
+  const layer = document.getElementById('flowerLayer');
+  const blossoms = ['🌺','🪷','💮','🌼','✿'];
+  const count = 18;
+  for(let i=0;i<count;i++){
+    const el = document.createElement('span');
+    el.className = 'petal';
+    el.textContent = blossoms[Math.floor(Math.random()*blossoms.length)];
+    const left = Math.random()*100, size = 13+Math.random()*15, duration = 10+Math.random()*9, delay = Math.random()*duration;
+    el.style.left = left+'vw'; el.style.fontSize = size+'px';
+    el.style.animationDuration = duration+'s'; el.style.animationDelay = '-'+delay+'s';
+    layer.appendChild(el);
+  }
+})();
+
+function downloadIcs(){
+  const ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Poorani and Jestin//Wedding//EN',
+    'BEGIN:VEVENT','UID:hindu-ceremony-poorani-jestin@savethedate',
+    'DTSTART:20270120T033000Z','DTEND:20270120T053000Z',
+    'SUMMARY:Poorani & Jestin - Hindu Wedding Muhurtham',
+    'LOCATION:Balaji Wedding Hall\\, Manachanallur\\, Trichy\\, Tamil Nadu',
+    'DESCRIPTION:Traditional South Indian wedding ceremony.','END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics], {type:'text/calendar'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'Poorani-Jestin-Hindu-Wedding.ics';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+function sharePage(){
+  const shareData = { title: 'Poorani & Jestin — Hindu Wedding', text: "You're invited to Poorani & Jestin's Hindu wedding Muhurtham!", url: window.location.href };
+  if(navigator.share){ navigator.share(shareData).catch(()=>{}); }
+  else{ navigator.clipboard.writeText(shareData.url).then(()=>alert('Link copied to clipboard!')).catch(()=>prompt('Copy this link:', shareData.url)); }
+}
+
+let audioCtx=null, musicOn=false, scheduleTimer=null, nextNoteTime=0, usingFile=false;
+const tempo=88, noteLen=60/tempo;
+const phrase=[{n:'C4',d:1},{n:'E4',d:1},{n:'G4',d:1},{n:'B4',d:1},{n:'A4',d:1},{n:'G4',d:2},{n:'D4',d:1},{n:'C4',d:2}];
+const freqs={C4:261.63,D4:293.66,E4:329.63,G4:392.0,A4:440.0,B4:493.88,C5:523.25};
+function scheduleNote(freq,time,dur){
+  const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
+  osc.type='sine'; osc.frequency.value=freq;
+  const osc2=audioCtx.createOscillator(); osc2.type='triangle'; osc2.frequency.value=freq/2;
+  const gain2=audioCtx.createGain();
+  gain.gain.setValueAtTime(0.0001,time); gain.gain.exponentialRampToValueAtTime(0.09,time+0.08); gain.gain.exponentialRampToValueAtTime(0.0001,time+dur*0.95);
+  gain2.gain.setValueAtTime(0.0001,time); gain2.gain.exponentialRampToValueAtTime(0.035,time+0.1); gain2.gain.exponentialRampToValueAtTime(0.0001,time+dur*0.95);
+  osc.connect(gain).connect(audioCtx.destination); osc2.connect(gain2).connect(audioCtx.destination);
+  osc.start(time); osc.stop(time+dur); osc2.start(time); osc2.stop(time+dur);
+}
+let phraseIndex=0;
+function schedulerTick(){
+  while(nextNoteTime < audioCtx.currentTime+1.0){
+    const step=phrase[phraseIndex%phrase.length]; const dur=step.d*noteLen;
+    scheduleNote(freqs[step.n], nextNoteTime, dur*0.9); nextNoteTime+=dur; phraseIndex++;
+  }
+  scheduleTimer=setTimeout(schedulerTick,200);
+}
+function toggleMusic(){
+  const btn=document.getElementById('musicBtn'), hint=document.getElementById('musicHint'), fileAudio=document.getElementById('bgAudio');
+  if(!musicOn){
+    fileAudio.currentTime=0; fileAudio.volume=0.5;
+    const p=fileAudio.play();
+    if(p!==undefined){ p.then(()=>{ musicOn=true; usingFile=true; btn.classList.remove('paused'); hint.textContent='now playing'; }).catch(()=>startGeneratedTune()); }
+    else{ startGeneratedTune(); }
+  } else {
+    if(usingFile){ fileAudio.pause(); usingFile=false; } else { clearTimeout(scheduleTimer); }
+    musicOn=false; btn.classList.add('paused'); hint.textContent='a little tune for you';
+  }
+}
+function startGeneratedTune(){
+  if(!audioCtx){ audioCtx=new (window.AudioContext||window.webkitAudioContext)(); }
+  if(audioCtx.state==='suspended'){ audioCtx.resume(); }
+  nextNoteTime=audioCtx.currentTime+0.1; phraseIndex=0; schedulerTick();
+  musicOn=true; usingFile=false;
+  document.getElementById('musicBtn').classList.remove('paused');
+  document.getElementById('musicHint').textContent='now playing';
+}
+</script>
+</body>
+</html>
