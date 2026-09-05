@@ -57,7 +57,7 @@
   .hero-photo img{ width:100%; height:100%; object-fit:cover; }
 
   .names-hero{
-    font-family:var(--serif); font-style:italic; font-weight:600;
+    font-family:var(--serif); font-style:normal; font-weight:700;
     font-size:clamp(32px,7vw,50px); color:var(--ink); margin:0; line-height:1.15;
   }
   .names-hero .amp{ color:var(--gold); font-style:normal; font-family:var(--script); font-size:0.85em; padding:0 4px; }
@@ -197,7 +197,7 @@
       <div class="tl-meta">
         <div><b>Date</b>Wednesday, 20 January 2027</div>
         <div><b>Time</b>9:00 AM</div>
-        <div><b>Venue</b>Balaji Wedding Hall, Manachanallur, Trichy, Tamil Nadu</div>
+        <div><b>Venue</b>Balaji Wedding Hall, Manachanallur, Trichy, Tamil Nadu, India</div>
       </div>
       <div class="tl-actions">
         <a class="btn btn-outline btn-small" href="https://share.google/AkiBAd2lYMHq3ThIQ" target="_blank" rel="noopener">📍 Directions</a>
@@ -292,7 +292,7 @@ function downloadIcs(){
     'BEGIN:VEVENT','UID:hindu-ceremony-poorani-jestin@savethedate',
     'DTSTART:20270120T033000Z','DTEND:20270120T053000Z',
     'SUMMARY:Jestin & Poorani - Hindu Wedding Muhurtham',
-    'LOCATION:Balaji Wedding Hall\\, Manachanallur\\, Trichy\\, Tamil Nadu',
+    'LOCATION:Balaji Wedding Hall\\, Manachanallur\\, Trichy\\, Tamil Nadu\\, India',
     'DESCRIPTION:Traditional South Indian wedding ceremony.','END:VEVENT','END:VCALENDAR'
   ].join('\r\n');
   const blob = new Blob([ics], {type:'text/calendar'});
@@ -353,29 +353,29 @@ function startGeneratedTune(){
 }
 
 /* ---------- Music persists across pages (best-effort; browsers may block autoplay) ---------- */
-const LS_PLAYING='stdMusicPlaying', LS_TIME='stdMusicTime';
+const LS_MUTED='stdMusicMuted', LS_TIME='stdMusicTime';
 function saveMusicState(){
   const fileAudio=document.getElementById('bgAudio');
   try{
-    localStorage.setItem(LS_PLAYING, musicOn?'1':'0');
+    localStorage.setItem(LS_MUTED, musicOn?'0':'1');
     if(usingFile) localStorage.setItem(LS_TIME, String(fileAudio.currentTime||0));
   }catch(e){}
 }
-function tryResumeMusic(){
-  let wasPlaying=false, savedTime=0;
-  try{ wasPlaying = localStorage.getItem(LS_PLAYING)==='1'; savedTime = parseFloat(localStorage.getItem(LS_TIME)||'0'); }catch(e){}
-  if(!wasPlaying) return;
+function tryAutoplayMusic(){
+  let muted=false, savedTime=0;
+  try{ muted = localStorage.getItem(LS_MUTED)==='1'; savedTime = parseFloat(localStorage.getItem(LS_TIME)||'0'); }catch(e){}
+  if(muted) return;
   const btn=document.getElementById('musicBtn'), hint=document.getElementById('musicHint'), fileAudio=document.getElementById('bgAudio');
   fileAudio.currentTime = savedTime||0; fileAudio.volume=0.5;
   const p=fileAudio.play();
   const markPlaying=()=>{ musicOn=true; usingFile=true; btn.classList.remove('paused'); hint.textContent='now playing'; };
-  const markBlocked=()=>{ hint.textContent='tap to resume music'; };
+  const markBlocked=()=>{ hint.textContent='tap to play music'; };
   if(p!==undefined){ p.then(markPlaying).catch(markBlocked); } else { markBlocked(); }
 }
 setInterval(()=>{ if(musicOn) saveMusicState(); }, 1500);
 window.addEventListener('pagehide', saveMusicState);
 document.addEventListener('visibilitychange', ()=>{ if(document.hidden) saveMusicState(); });
-tryResumeMusic();
+tryAutoplayMusic();
 </script>
 </body>
 </html>
