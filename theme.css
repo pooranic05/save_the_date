@@ -1,0 +1,63 @@
+/* Eucalyptus green + cream theme (shared by index / christian / hindu) */
+html[data-page]{
+  --ink:#2F4A3F; --ink-soft:#5C7767; --cream:#FFFBF1;
+  --page-grad: linear-gradient(165deg, #FBF6E9 0%, #EAF0E2 48%, #D3E0CF 100%);
+  --gold:#B88B35; --gold-soft:#F0DDB0;
+  --lilac:#4F7A66;           /* eucalyptus (used as the Christian accent on the home page) */
+  --rose:#C2527A;            /* pink (Hindu accent) */
+  --accent:#4F7A66; --accent-soft:#EDF3E6;
+}
+html[data-page="hindu"]{
+  --page-grad: linear-gradient(165deg, #FDF4EA 0%, #F1ECE0 40%, #E5E9DA 70%, #D7DFCD 100%);
+  --accent:#C2527A; --accent-soft:#FBE9EC;
+  --ink-soft:#6A7A6B;
+}
+body{ background:var(--page-grad); background-attachment:fixed; }
+#starLayer, .shooting-star{ display:none !important; }
+.blob{ opacity:.22 !important; }
+html[data-page="christian"] .blob2, html[data-page="hindu"] .blob2{ background:#EAD9A8; }
+html[data-page="hindu"] .blob1{ background:#F2B3C6; }
+
+/* readable chrome on the light theme */
+.home-link{ background:rgba(255,251,241,.92) !important; color:var(--ink) !important; box-shadow:0 8px 20px -10px rgba(47,74,63,.35) !important; }
+.btn-outline{ border-color:rgba(47,74,63,.3) !important; }
+.tl-tag{ background:rgba(79,122,102,.12) !important; }
+html[data-page="hindu"] .tl-tag{ background:rgba(194,82,122,.12) !important; }
+.music-btn{ box-shadow:0 10px 26px -10px rgba(47,74,63,.45) !important; }
+.cd-box, .vine-card, .door, .card{ box-shadow:0 20px 44px -26px rgba(47,74,63,.35) !important; }
+.vine-card{ background:var(--accent-soft) !important; }
+.hero-photo{ box-shadow:0 26px 60px -24px rgba(47,74,63,.5) !important; }
+.names .amp, .names-hero .amp, .amp{ color:var(--gold) !important; }
+html[data-page="hindu"] .btn-gold, .btn-gold{ background:linear-gradient(135deg,#F0DDB0,#D9B25F) !important; color:#4A3A1A !important; }
+
+/* home page cover + doors */
+.wish-names{ color:#3F5F52 !important; }
+.door-icon{ background:color-mix(in srgb, var(--accent) 16%, #FFFBF1) !important; }
+.door .door-date{ color:var(--accent) !important; }
+
+/* cross-links: Christian page points to the pink Hindu page, Hindu page points to the green one */
+html[data-page="christian"] .cross-link a{ background:linear-gradient(135deg,#D9739A,#BF4F74) !important; }
+html[data-page="hindu"] .cross-link a{ background:linear-gradient(135deg,#6F9A84,#4F7A66) !important; box-shadow:0 14px 30px -14px rgba(79,122,102,.55) !important; }
+
+/* ---------- plants ---------- */
+#plants{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+#plants::after{ /* soft shade toward the edges */
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(47,74,63,.16) 100%);
+}
+#plants .base{ position:absolute; width:0; height:0; }
+#plants svg{ position:absolute; bottom:0; left:50%; overflow:visible; transform-origin:50% 100%; margin-left:calc(var(--w) / -2);
+  width:var(--w); height:calc(var(--w) * 1.35); animation:sway var(--dur) ease-in-out infinite alternate; animation-delay:var(--delay); }
+@keyframes sway{ from{ transform:rotate(calc(var(--rot) - 2.2deg)); } to{ transform:rotate(calc(var(--rot) + 2.2deg)); } }
+@media (prefers-reduced-motion: reduce){ #plants svg{ animation:none; transform:rotate(var(--rot)); } }
+
+/* panels: rounded, softly translucent instead of hard cream blocks */
+.message-section, .timeline-section, .details-section, .cross-link{
+  background:rgba(255,251,241,.8) !important; border-radius:30px; margin:26px auto !important;
+  box-shadow:0 24px 50px -34px rgba(47,74,63,.45); backdrop-filter:blur(3px);
+  width:calc(100% - 32px);
+}
+@media(max-width:600px){ .message-section, .timeline-section, .details-section, .cross-link{ width:calc(100% - 20px); border-radius:24px; } }
+
+/* let the plants show behind the "make a wish" cover */
+.wish-overlay{ background:transparent !important; }
